@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="330dp"
+    android:layout_height="wrap_content"
+    android:background="#37474f"
+    android:padding="5dp"
+    android:layout_gravity="center">
+    <!--<TextView
+        android:id="@+id/txtclose"
+        android:layout_width="@dimen/_35sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:textColor="@color/white"
+        android:text="X"
+        android:textStyle="bold"
+        android:layout_gravity="end"
+        android:gravity="center"/>-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="@dimen/_10sdp">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Requires additional Infromation"
+            android:gravity="center"
+            android:textSize="@dimen/_16sdp"
+            android:fontFamily="@font/spartan_bold"
+            android:textStyle="bold"
+            android:layout_marginBottom="@dimen/_20sdp"/>
+
+
+        <EditText
+            android:id="@+id/reg_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name"
+            android:textSize="@dimen/_12sdp"
+            android:fontFamily="@font/spartan_regular"
+            android:background="@drawable/edit_text_shape"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:padding="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:autofillHints="yes"
+            android:inputType="textPersonName|textCapWords" />
+
+
+        <EditText
+            android:id="@+id/reg_enrolment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enrolment Number"
+            android:textSize="@dimen/_12sdp"
+            android:fontFamily="@font/spartan_regular"
+            android:background="@drawable/edit_text_shape"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:padding="@dimen/_10sdp"/>
+
+        <TextView
+            android:id="@+id/txt_add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textSize="@dimen/_16sdp"
+            android:background="@drawable/signin_shape"
+            android:padding="@dimen/_6sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>
