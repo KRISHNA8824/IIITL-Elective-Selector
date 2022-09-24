@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/drawable-v24/edit_text_shape.xml" value="0.153" />
         <entry key="app/src/main/res/drawable-v24/signin_shape.xml" value="0.153" />
+        <entry key="app/src/main/res/layout/activity_admin_portal.xml" value="0.2708333333333333" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.2708333333333333" />
         <entry key="app/src/main/res/layout/activity_login_admin.xml" value="0.2708333333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.28968713789107764" />
