@@ -1,13 +1,10 @@
-package com.example.iiitl_elective_selector_app;
+package com.example.iiitl_elective_selector_app.Authentication;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -17,25 +14,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.example.iiitl_elective_selector_app.AdminPortal.AdminPortal;
+import com.example.iiitl_elective_selector_app.R;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.auth.SignInMethodQueryResult;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-public class Login extends AppCompatActivity {
+public class LoginAdmin extends AppCompatActivity {
     EditText reg_name, reg_email, reg_enrolment;
     TextView txt_signIn, txt_signup, txt_add;
     CardView googleSignin;
@@ -52,16 +39,16 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login_admin);
         txt_signIn = findViewById(R.id.txt_signin);
-        txt_signup = findViewById(R.id.txt_signup);
-        googleSignin = findViewById(R.id.Signinwg);
+//        txt_signup = findViewById(R.id.txt_signup);
+//        googleSignin = findViewById(R.id.Signinwg);
         mAuth = FirebaseAuth.getInstance();
 
         email = findViewById(R.id.login_email);
         pass = findViewById(R.id.login_pass);
 
-        progressDialog = new ProgressDialog(Login.this);
+        progressDialog = new ProgressDialog(LoginAdmin.this);
         progressDialog.setMessage("Please wait...");
         progressDialog.setCancelable(false);
 
@@ -74,28 +61,30 @@ public class Login extends AppCompatActivity {
 
                 if(TextUtils.isEmpty(Email) || TextUtils.isEmpty(Pass)){
                     progressDialog.dismiss();
-                    Toast.makeText(Login.this, "Enter valid data", Toast.LENGTH_SHORT).show();
-                }else if(!((Email.endsWith("@iiitl.ac.in")) || Email.equals("admin@gmail.com"))){
-                    progressDialog.dismiss();
-                    email.setError("Invalid Email");
-                    Toast.makeText(Login.this, "Invalid Email", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginAdmin.this, "Enter valid data", Toast.LENGTH_SHORT).show();
                 }else if(Pass.length()<6){
                     progressDialog.dismiss();
                     pass.setError("Invalid Password");
-                    Toast.makeText(Login.this, "Invalid Password", Toast.LENGTH_SHORT).show();
-                }else{
+                    Toast.makeText(LoginAdmin.this, "Invalid Password", Toast.LENGTH_SHORT).show();
+                }
+                else if(!Email.equals("admin@gmail.com")){
+                    progressDialog.dismiss();
+                    email.setError("Wrong Email");
+                    Toast.makeText(LoginAdmin.this, "No account is registered with this email-id.", Toast.LENGTH_SHORT).show();
+                }
+                else{
                     mAuth.signInWithEmailAndPassword(Email, Pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
 
                                 progressDialog.dismiss();
-                                Toast.makeText(Login.this, "Welcome to administration page.", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(Login.this, StudentPortal.class));
+                                Toast.makeText(LoginAdmin.this, "Welcome to administration page.", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(LoginAdmin.this, AdminPortal.class));
                             }
                             else{
                                 progressDialog.dismiss();
-                                Toast.makeText(Login.this, "Error to login10", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginAdmin.this, "Error to login10", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -104,6 +93,8 @@ public class Login extends AppCompatActivity {
             }
         });
         myDialog = new Dialog(this);
+
+        /*
         googleSignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -116,11 +107,13 @@ public class Login extends AppCompatActivity {
         txt_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Login.this, Registration.class));
+                startActivity(new Intent(LoginAdmin.this, Registration.class));
             }
         });
-    }
 
+        */
+    }
+/*
     private void fun() {
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -155,7 +148,11 @@ public class Login extends AppCompatActivity {
                     public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
 
                         //Toast.makeText(Login.this, ""+task.getResult().getSignInMethods(), Toast.LENGTH_SHORT).show();
-                        if(task.getResult().getSignInMethods().isEmpty()){
+                        if(!account.getEmail().equals("admin@gmail.com")){
+                            progressDialog.dismiss();
+                            Toast.makeText(LoginAdmin.this, "No account is registered with this email-id.", Toast.LENGTH_SHORT).show();
+                        }
+                        else if(task.getResult().getSignInMethods().isEmpty()){
                             Log.d("...........", "firebaseAuthWithGoogle:" + account.getEmail()+" no");
                             progressDialog.dismiss();
                             ShowPopup(account.getIdToken(), account.getDisplayName());
@@ -182,7 +179,7 @@ public class Login extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             if(status=="1"){
                                 progressDialog.dismiss();
-                                startActivity(new Intent(Login.this, StudentPortal.class));
+                                startActivity(new Intent(LoginAdmin.this, StudentPortal.class));
                                 Toast.makeText(getApplicationContext(), "You are successfully signed in.", Toast.LENGTH_SHORT).show();
                             }
                             else{
@@ -197,13 +194,13 @@ public class Login extends AppCompatActivity {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     progressDialog.dismiss();
-                                                    startActivity(new Intent(Login.this, StudentPortal.class));
+                                                    startActivity(new Intent(LoginAdmin.this, AdminPortal.class));
                                                     Toast.makeText(getApplicationContext(), "Your account is created successfully", Toast.LENGTH_SHORT).show();
                                                 }
                                             });
                                         } else {
                                             progressDialog.dismiss();
-                                            Toast.makeText(Login.this, "Error in creating user at final", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(LoginAdmin.this, "Error in creating user at final", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 });
@@ -236,7 +233,7 @@ public class Login extends AppCompatActivity {
 
                 if (TextUtils.isEmpty(name) || TextUtils.isEmpty(enrolment)) {
                     progressDialog.dismiss();
-                    Toast.makeText(Login.this, "Please enter a valid input", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginAdmin.this, "Please enter a valid input", Toast.LENGTH_SHORT).show();
                 } else {
                     DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Registered Enrolment").child(enrolment);
                     reference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -244,7 +241,7 @@ public class Login extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if(snapshot.exists()){
                                 progressDialog.dismiss();
-                                Toast.makeText(Login.this, "An account already exists with this email.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginAdmin.this, "An account already exists with this email.", Toast.LENGTH_SHORT).show();
                             }
                             else{
                                 myDialog.dismiss();
@@ -255,7 +252,7 @@ public class Login extends AppCompatActivity {
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
                             progressDialog.dismiss();
-                            Toast.makeText(Login.this, "Error: "+error+" occurred", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginAdmin.this, "Error: "+error+" occurred", Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -267,5 +264,7 @@ public class Login extends AppCompatActivity {
         myDialog.show();
 
     }
+
+ */
 
 }

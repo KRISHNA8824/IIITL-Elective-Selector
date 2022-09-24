@@ -1,4 +1,4 @@
-package com.example.iiitl_elective_selector_app;
+package com.example.iiitl_elective_selector_app.StudentPortal;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,19 +7,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.iiitl_elective_selector_app.MainActivity;
+import com.example.iiitl_elective_selector_app.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class AdminPortal extends AppCompatActivity {
+public class StudentPortal extends AppCompatActivity {
 
     TextView logout;
     FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_portal);
+        setContentView(R.layout.activity_student_portal);
 
         logout = findViewById(R.id.logout);
         mAuth = FirebaseAuth.getInstance();
@@ -31,10 +33,11 @@ public class AdminPortal extends AppCompatActivity {
                         .requestIdToken(getString(R.string.default_web_client_id))
                         .requestEmail()
                         .build();
-                GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(AdminPortal.this, gso);
+                GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(StudentPortal.this, gso);
                 mGoogleSignInClient.signOut();
-                startActivity(new Intent(AdminPortal.this, MainActivity.class));
+                startActivity(new Intent(StudentPortal.this, MainActivity.class));
             }
         });
+
     }
 }

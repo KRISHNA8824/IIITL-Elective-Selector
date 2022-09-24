@@ -1,4 +1,4 @@
-package com.example.iiitl_elective_selector_app;
+package com.example.iiitl_elective_selector_app.Authentication;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -18,6 +18,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.iiitl_elective_selector_app.R;
+import com.example.iiitl_elective_selector_app.Users;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;

@@ -16,19 +16,22 @@
         android:theme="@style/Theme.IIITLElectiveSelectorApp"
         tools:targetApi="31">
         <activity
-            android:name=".AdminPortal"
+            android:name=".AdminPortal.SelectBranch"
             android:exported="false" />
         <activity
-            android:name=".LoginAdmin"
+            android:name=".AdminPortal.AdminPortal"
             android:exported="false" />
         <activity
-            android:name=".StudentPortal"
+            android:name=".Authentication.LoginAdmin"
             android:exported="false" />
         <activity
-            android:name=".Login"
+            android:name=".StudentPortal.StudentPortal"
             android:exported="false" />
         <activity
-            android:name=".Registration"
+            android:name=".Authentication.Login"
+            android:exported="false" />
+        <activity
+            android:name=".Authentication.Registration"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

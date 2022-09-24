@@ -4,30 +4,270 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StudentPortal">
+    tools:context=".AdminPortal.AdminPortal">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginBottom="5dp"
+        tools:layout_centerHorizontal="true"
+        android:background="@color/purple_500"
+        app:titleTextColor="@color/white"
+        app:titleMarginStart="@dimen/_50sdp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:id="@+id/rl"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="Admin Portal"
+                android:id="@+id/tv1"
+
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/_18sdp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="28dp"
+                android:id="@+id/logout"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="@dimen/_5sdp"
+                android:background="@drawable/ic_logout"
+                android:layout_height="28dp"/>
+
+
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
         android:orientation="vertical"
-        >
+        android:layout_below="@+id/toolbar">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Admin Portal"
-            android:textSize="@dimen/_20sdp"/>
+        <RelativeLayout
+            android:id="@+id/sem1"
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/_5sdp"
+            android:background="@drawable/shape_item"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Click to Logout"
-            android:background="@color/purple_200"
-            android:textSize="@dimen/_20sdp"
-            />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="@dimen/_5sdp"
+                android:background="@drawable/book_details">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_20sdp"
+                    android:textColor="@color/white"
+                    android:text="Semester 1"
+                    android:gravity="center"
+                    android:layout_margin = "@dimen/_5sdp"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/sem2"
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/_5sdp"
+            android:background="@drawable/shape_item"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="@dimen/_5sdp"
+                android:background="@drawable/book_details">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_20sdp"
+                    android:textColor="@color/white"
+                    android:text="Semester 2"
+                    android:gravity="center"
+                    android:layout_margin = "@dimen/_5sdp"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/sem3"
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/_5sdp"
+            android:background="@drawable/shape_item"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="@dimen/_5sdp"
+                android:background="@drawable/book_details">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_20sdp"
+                    android:textColor="@color/white"
+                    android:text="Semester 3"
+                    android:gravity="center"
+                    android:layout_margin = "@dimen/_5sdp"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/sem4"
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/_5sdp"
+            android:background="@drawable/shape_item"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="@dimen/_5sdp"
+                android:background="@drawable/book_details">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_20sdp"
+                    android:textColor="@color/white"
+                    android:text="Semester 4"
+                    android:gravity="center"
+                    android:layout_margin = "@dimen/_5sdp"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/sem5"
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/_5sdp"
+            android:background="@drawable/shape_item"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="@dimen/_5sdp"
+                android:background="@drawable/book_details">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_20sdp"
+                    android:textColor="@color/white"
+                    android:text="Semester 5"
+                    android:gravity="center"
+                    android:layout_margin = "@dimen/_5sdp"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/sem6"
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/_5sdp"
+            android:background="@drawable/shape_item"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="@dimen/_5sdp"
+                android:background="@drawable/book_details">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_20sdp"
+                    android:textColor="@color/white"
+                    android:text="Semester 6"
+                    android:gravity="center"
+                    android:layout_margin = "@dimen/_5sdp"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/sem7"
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/_5sdp"
+            android:background="@drawable/shape_item"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="@dimen/_5sdp"
+                android:background="@drawable/book_details">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_20sdp"
+                    android:textColor="@color/white"
+                    android:text="Semester 7"
+                    android:gravity="center"
+                    android:layout_margin = "@dimen/_5sdp"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/sem8"
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/_5sdp"
+            android:background="@drawable/shape_item"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="@dimen/_5sdp"
+                android:background="@drawable/book_details">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_20sdp"
+                    android:textColor="@color/white"
+                    android:text="Semester 8"
+                    android:gravity="center"
+                    android:layout_margin = "@dimen/_5sdp"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
     </LinearLayout>
+
 
 
 </RelativeLayout>

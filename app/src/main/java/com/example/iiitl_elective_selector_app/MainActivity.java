@@ -6,9 +6,11 @@ import androidx.cardview.widget.CardView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
+import com.example.iiitl_elective_selector_app.AdminPortal.AdminPortal;
+import com.example.iiitl_elective_selector_app.Authentication.LoginAdmin;
+import com.example.iiitl_elective_selector_app.Authentication.Registration;
+import com.example.iiitl_elective_selector_app.StudentPortal.StudentPortal;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,9 +23,14 @@ public class MainActivity extends AppCompatActivity {
 
         admin = (CardView) findViewById(R.id.admin);
         student = (CardView) findViewById(R.id.student);
-
-        if(FirebaseAuth.getInstance().getCurrentUser() != null){
-            startActivity(new Intent(MainActivity.this, StudentPortal.class));
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        if(mAuth.getCurrentUser() != null){
+            if(mAuth.getCurrentUser().getEmail().equals("admin@gmail.com")){
+                startActivity(new Intent(MainActivity.this, AdminPortal.class));
+            }
+            else{
+                startActivity(new Intent(MainActivity.this, StudentPortal.class));
+            }
         }
         admin.setOnClickListener(new View.OnClickListener() {
             @Override
