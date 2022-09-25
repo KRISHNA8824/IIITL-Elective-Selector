@@ -5,269 +5,128 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AdminPortal.AdminPortal">
-
-    <androidx.appcompat.widget.Toolbar
+    <LinearLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_40sdp"
-        android:layout_marginBottom="5dp"
-        tools:layout_centerHorizontal="true"
-        android:background="@color/purple_500"
-        app:titleTextColor="@color/white"
-        app:titleMarginStart="@dimen/_50sdp"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" >
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:id="@+id/rl"
-            android:layout_height="match_parent">
-            <TextView
-                android:layout_width="wrap_content"
-                android:text="Admin Portal"
-                android:id="@+id/tv1"
+        android:orientation="horizontal"
+        android:background="@color/purple_700"
+        android:gravity="center">
 
-                android:layout_centerVertical="true"
-                android:textSize="@dimen/_18sdp"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:layout_height="wrap_content"/>
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="28dp"
-                android:id="@+id/logout"
-                android:layout_centerVertical="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginRight="@dimen/_5sdp"
-                android:background="@drawable/ic_logout"
-                android:layout_height="28dp"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Admin Home"
+            android:textSize="@dimen/_16sdp"
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/_10sdp"/>
 
 
-        </RelativeLayout>
-    </androidx.appcompat.widget.Toolbar>
+        <ImageView
+            android:id="@+id/logoutIV"
+            android:layout_width="@dimen/_22sdp"
+            android:layout_height="@dimen/_22sdp"
+            android:background="@drawable/logout1"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:contentDescription="Logout" />
 
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_below="@+id/toolbar">
-
-        <RelativeLayout
-            android:id="@+id/sem1"
+        android:layout_below="@+id/toolbar"
+        >
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
-            android:layout_margin="@dimen/_5sdp"
-            android:background="@drawable/shape_item"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <LinearLayout
+            <!-- Inside text input layout add
+                  an auto complete text view
+                    and make its input type to none-->
+            <AutoCompleteTextView
+                android:id="@+id/programTV"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="@dimen/_5sdp"
-                android:background="@drawable/book_details">
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:inputType="none"
+                android:text="Choose your program"
+                />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/_20sdp"
-                    android:textColor="@color/white"
-                    android:text="Semester 1"
-                    android:gravity="center"
-                    android:layout_margin = "@dimen/_5sdp"/>
 
-            </LinearLayout>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/sem2"
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
-            android:layout_margin="@dimen/_5sdp"
-            android:background="@drawable/shape_item"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <LinearLayout
+            <!-- Inside text input layout add
+                  an auto complete text view
+                    and make its input type to none-->
+            <AutoCompleteTextView
+                android:id="@+id/branchTV"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="@dimen/_5sdp"
-                android:background="@drawable/book_details">
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:inputType="none"
+                android:text="Choose your branch"
+                />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/_20sdp"
-                    android:textColor="@color/white"
-                    android:text="Semester 2"
-                    android:gravity="center"
-                    android:layout_margin = "@dimen/_5sdp"/>
-
-            </LinearLayout>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/sem3"
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
-            android:layout_margin="@dimen/_5sdp"
-            android:background="@drawable/shape_item"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <LinearLayout
+            <!-- Inside text input layout add
+                  an auto complete text view
+                    and make its input type to none-->
+            <AutoCompleteTextView
+                android:id="@+id/yearTV"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="@dimen/_5sdp"
-                android:background="@drawable/book_details">
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:inputType="none"
+                android:text="Choose your year"
+                />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/_20sdp"
-                    android:textColor="@color/white"
-                    android:text="Semester 3"
-                    android:gravity="center"
-                    android:layout_margin = "@dimen/_5sdp"/>
-
-            </LinearLayout>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/sem4"
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
-            android:layout_margin="@dimen/_5sdp"
-            android:background="@drawable/shape_item"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <LinearLayout
+            <!-- Inside text input layout add
+                  an auto complete text view
+                    and make its input type to none-->
+            <AutoCompleteTextView
+                android:id="@+id/semesterTV"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="@dimen/_5sdp"
-                android:background="@drawable/book_details">
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:inputType="none"
+                android:text="Choose your semester"
+                />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/_20sdp"
-                    android:textColor="@color/white"
-                    android:text="Semester 4"
-                    android:gravity="center"
-                    android:layout_margin = "@dimen/_5sdp"/>
-
-            </LinearLayout>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/sem5"
-            android:layout_width="match_parent"
-            android:layout_margin="@dimen/_5sdp"
-            android:background="@drawable/shape_item"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="@dimen/_5sdp"
-                android:background="@drawable/book_details">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/_20sdp"
-                    android:textColor="@color/white"
-                    android:text="Semester 5"
-                    android:gravity="center"
-                    android:layout_margin = "@dimen/_5sdp"/>
-
-            </LinearLayout>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/sem6"
-            android:layout_width="match_parent"
-            android:layout_margin="@dimen/_5sdp"
-            android:background="@drawable/shape_item"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="@dimen/_5sdp"
-                android:background="@drawable/book_details">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/_20sdp"
-                    android:textColor="@color/white"
-                    android:text="Semester 6"
-                    android:gravity="center"
-                    android:layout_margin = "@dimen/_5sdp"/>
-
-            </LinearLayout>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/sem7"
-            android:layout_width="match_parent"
-            android:layout_margin="@dimen/_5sdp"
-            android:background="@drawable/shape_item"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="@dimen/_5sdp"
-                android:background="@drawable/book_details">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/_20sdp"
-                    android:textColor="@color/white"
-                    android:text="Semester 7"
-                    android:gravity="center"
-                    android:layout_margin = "@dimen/_5sdp"/>
-
-            </LinearLayout>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/sem8"
-            android:layout_width="match_parent"
-            android:layout_margin="@dimen/_5sdp"
-            android:background="@drawable/shape_item"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="@dimen/_5sdp"
-                android:background="@drawable/book_details">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/_20sdp"
-                    android:textColor="@color/white"
-                    android:text="Semester 8"
-                    android:gravity="center"
-                    android:layout_margin = "@dimen/_5sdp"/>
-
-            </LinearLayout>
-
-        </RelativeLayout>
-
+        </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
-
-
-
 </RelativeLayout>
