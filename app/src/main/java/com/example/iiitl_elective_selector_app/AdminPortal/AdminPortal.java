@@ -27,16 +27,15 @@ public class AdminPortal extends AppCompatActivity {
     AutoCompleteTextView program_autoCompleteTextView, branch_autoCompleteTextView, year_autoCompleteTextView, semester_autoCompleteTextView;
 
     FirebaseAuth mAuth;
-    String program , branch, year, semester ;
+    String program , branch, year ;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_portal);
+
         program_menuTIL = findViewById(R.id.program_menuTIL);
         program_autoCompleteTextView = findViewById(R.id.programTV);
-
-
         String [] program_itemList = {"B.Tech", "M.Tech"};
         ArrayAdapter<String> program_itemArrayAdapter = new ArrayAdapter<>(AdminPortal.this, R.layout.dropdown_item, program_itemList);
         program_autoCompleteTextView.setAdapter(program_itemArrayAdapter);
@@ -45,18 +44,6 @@ public class AdminPortal extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 program_autoCompleteTextView.setText((String)parent.getItemAtPosition(position));
                 program = (String)parent.getItemAtPosition(position);
-            }
-        });
-        branch_menuTIL = findViewById(R.id.branch_menuTIL);
-        branch_autoCompleteTextView = findViewById(R.id.branchTV);
-        String [] branch_itemList = {"CSAI", "CS", "IT", "CSB"};
-        ArrayAdapter<String> branch_itemArrayAdapter = new ArrayAdapter<>(AdminPortal.this, R.layout.dropdown_item, branch_itemList);
-        branch_autoCompleteTextView.setAdapter(branch_itemArrayAdapter);
-        branch_autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                branch_autoCompleteTextView.setText((String)parent.getItemAtPosition(position));
-                branch = (String)parent.getItemAtPosition(position);
             }
         });
 
@@ -73,18 +60,19 @@ public class AdminPortal extends AppCompatActivity {
             }
         });
 
-        semester_menuTIL = findViewById(R.id.semester_menuTIL);
-        semester_autoCompleteTextView = findViewById(R.id.semesterTV);
-        String [] semester_itemList = {"Semester 1", "Semester 2", "Semester 3","Semester 4"};
-        ArrayAdapter<String> semester_itemArrayAdapter = new ArrayAdapter<>(AdminPortal.this, R.layout.dropdown_item, semester_itemList);
-        semester_autoCompleteTextView.setAdapter(semester_itemArrayAdapter);
-        semester_autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        branch_menuTIL = findViewById(R.id.branch_menuTIL);
+        branch_autoCompleteTextView = findViewById(R.id.branchTV);
+        String [] branch_itemList = {"CSAI", "CS", "IT", "CSB"};
+        ArrayAdapter<String> branch_itemArrayAdapter = new ArrayAdapter<>(AdminPortal.this, R.layout.dropdown_item, branch_itemList);
+        branch_autoCompleteTextView.setAdapter(branch_itemArrayAdapter);
+        branch_autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                semester_autoCompleteTextView.setText((String)parent.getItemAtPosition(position));
-                semester = (String)parent.getItemAtPosition(position);
+                branch_autoCompleteTextView.setText((String)parent.getItemAtPosition(position));
+                branch = (String)parent.getItemAtPosition(position);
             }
         });
+
 
         logout = findViewById(R.id.logoutIV);
         mAuth = FirebaseAuth.getInstance();
