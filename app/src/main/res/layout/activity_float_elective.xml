@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AdminPortal.FloatElective">
+    <LinearLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:orientation="horizontal"
+        android:background="@color/purple_700"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Float Elective"
+
+            android:textSize="@dimen/_16sdp"
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/_10sdp"/>
+
+
+    </LinearLayout>
+    <LinearLayout
+
+        android:layout_below="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:id="@+id/programTV"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_40sdp"
+            android:textSize="@dimen/_14sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_marginLeft="@dimen/_60sdp"
+            />
+        <TextView
+            android:id="@+id/yearTV"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_40sdp"
+            android:textSize="@dimen/_14sdp"
+            android:layout_marginLeft="@dimen/_60sdp"
+            />
+        <TextView
+            android:id="@+id/branchTV"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_40sdp"
+            android:textSize="@dimen/_14sdp"
+            android:layout_marginLeft="@dimen/_60sdp"
+            />
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/addElectiveTV"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Elective "
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/_20sdp"
+        android:background="@drawable/round_primary"
+        android:layout_marginTop="@dimen/_400sdp"
+
+        />
+</RelativeLayout>

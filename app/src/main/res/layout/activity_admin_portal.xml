@@ -37,8 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_below="@+id/toolbar"
-        >
+        android:layout_below="@+id/toolbar">
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
@@ -94,11 +93,27 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:inputType="none"
-                android:text="Choose branch"
-                />
+                android:text="Choose branch" />
 
         </com.google.android.material.textfield.TextInputLayout>
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="@dimen/_40sdp"
+           android:orientation="vertical"
+           android:background="@drawable/round_primary"
+           android:gravity="center">
+           <TextView
+               android:id="@+id/float_electiveTV"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Float Elective"
 
+               android:textSize="@dimen/_15sdp"
+               android:textStyle="bold"
+               android:textColor="@color/white"
+               android:background="@color/purple_500"
+               />
 
+       </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

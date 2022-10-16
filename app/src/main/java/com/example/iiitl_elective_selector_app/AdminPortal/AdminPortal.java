@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.iiitl_elective_selector_app.MainActivity;
 import com.example.iiitl_elective_selector_app.R;
@@ -20,12 +21,14 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.ArrayList;
+
 public class AdminPortal extends AppCompatActivity {
 
     ImageView logout;
     TextInputLayout program_menuTIL,branch_menuTIL, year_menuTIL, semester_menuTIL;
     AutoCompleteTextView program_autoCompleteTextView, branch_autoCompleteTextView, year_autoCompleteTextView, semester_autoCompleteTextView;
-
+    TextView float_electiveTV;
     FirebaseAuth mAuth;
     String program , branch, year ;
     @SuppressLint("MissingInflatedId")
@@ -33,6 +36,7 @@ public class AdminPortal extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_portal);
+
 
         program_menuTIL = findViewById(R.id.program_menuTIL);
         program_autoCompleteTextView = findViewById(R.id.programTV);
@@ -72,6 +76,23 @@ public class AdminPortal extends AppCompatActivity {
                 branch = (String)parent.getItemAtPosition(position);
             }
         });
+
+        float_electiveTV = findViewById(R.id.float_electiveTV);
+        float_electiveTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               // startActivity(new Intent(getApplicationContext(),FloatElective.class));
+                Intent intent = new Intent(getApplicationContext(), FloatElective.class);
+                String [] dataString = new String[3];
+                dataString[0] = program;
+                dataString[1] = year;
+                dataString[2] = branch;
+
+                intent.putExtra("stringArray", dataString);
+                startActivity(intent);
+            }
+        });
+
 
 
         logout = findViewById(R.id.logoutIV);
