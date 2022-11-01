@@ -15,6 +15,13 @@
         android:theme="@style/Theme.IIITLElectiveSelectorApp"
         tools:targetApi="31">
         <activity
+            android:name=".AdminPortal.ShowElectives"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".AdminPortal.AdminPortal"
             android:exported="false">
             <meta-data
@@ -30,11 +37,10 @@
         </activity>
         <activity
             android:name=".AdminPortal.AddSubjects"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".Authentication.LoginAdmin"
             android:exported="false" />
-
         <activity
             android:name=".StudentPortal.StudentPortal"
             android:exported="false" />
