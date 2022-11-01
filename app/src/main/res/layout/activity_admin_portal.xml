@@ -34,86 +34,73 @@
 
     </LinearLayout>
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/_200sdp"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/_5sdp"
         android:layout_below="@+id/toolbar">
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:id="@+id/program_menuTIL"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:background="@drawable/round_grey"
+            >
 
-            <AutoCompleteTextView
-                android:id="@+id/programTV"
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinner_program"
+                android:layout_width="200dp"
+                android:layout_gravity="right"
+                android:layout_height="40dp"></androidx.appcompat.widget.AppCompatSpinner>
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:background="@drawable/round_grey"
+            >
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinner_year"
+                android:layout_width="200dp"
+                android:layout_gravity="right"
+                android:layout_height="40dp"></androidx.appcompat.widget.AppCompatSpinner>
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:background="@drawable/round_grey"
+            >
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinner_branch"
+                android:layout_width="200dp"
+                android:layout_gravity="right"
+                android:layout_height="40dp"></androidx.appcompat.widget.AppCompatSpinner>
+        </FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30sdp"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/round_primary"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/float_electiveTV"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:inputType="none"
-                android:text="Choose program"
+                android:layout_height="wrap_content"
+                android:text="Float Elective"
+                android:gravity="center"
+                android:textSize="@dimen/_15sdp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@color/purple_500"
                 />
-        </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:id="@+id/year_menuTIL"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
 
-            <AutoCompleteTextView
-                android:id="@+id/yearTV"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:inputType="none"
-                android:text="Choose year"
-                />
-
-        </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:id="@+id/branch_menuTIL"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <AutoCompleteTextView
-                android:id="@+id/branchTV"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:inputType="none"
-                android:text="Choose branch" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="@dimen/_40sdp"
-           android:orientation="vertical"
-           android:background="@drawable/round_primary"
-           android:gravity="center">
-           <TextView
-               android:id="@+id/float_electiveTV"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="Float Elective"
-
-               android:textSize="@dimen/_15sdp"
-               android:textStyle="bold"
-               android:textColor="@color/white"
-               android:background="@color/purple_500"
-               />
-
-       </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

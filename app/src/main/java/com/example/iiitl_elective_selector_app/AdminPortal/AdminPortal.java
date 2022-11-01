@@ -1,8 +1,10 @@
 package com.example.iiitl_elective_selector_app.AdminPortal;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatSpinner;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -26,9 +28,8 @@ import java.util.ArrayList;
 public class AdminPortal extends AppCompatActivity {
 
     ImageView logout;
-    TextInputLayout program_menuTIL,branch_menuTIL, year_menuTIL, semester_menuTIL;
-    AutoCompleteTextView program_autoCompleteTextView, branch_autoCompleteTextView, year_autoCompleteTextView, semester_autoCompleteTextView;
     TextView float_electiveTV;
+    AppCompatSpinner spinner_program,spinner_year, spinner_branch;
     FirebaseAuth mAuth;
     String program , branch, year ;
     @SuppressLint("MissingInflatedId")
@@ -38,50 +39,29 @@ public class AdminPortal extends AppCompatActivity {
         setContentView(R.layout.activity_admin_portal);
 
 
-        program_menuTIL = findViewById(R.id.program_menuTIL);
-        program_autoCompleteTextView = findViewById(R.id.programTV);
+        spinner_program = findViewById(R.id.spinner_program);
         String [] program_itemList = {"B.Tech", "M.Tech"};
         ArrayAdapter<String> program_itemArrayAdapter = new ArrayAdapter<>(AdminPortal.this, R.layout.dropdown_item, program_itemList);
-        program_autoCompleteTextView.setAdapter(program_itemArrayAdapter);
-        program_autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                program_autoCompleteTextView.setText((String)parent.getItemAtPosition(position));
-                program = (String)parent.getItemAtPosition(position);
-            }
-        });
+        spinner_program.setAdapter(program_itemArrayAdapter);
+        program = spinner_program.getSelectedItem().toString();
 
-        year_menuTIL = findViewById(R.id.year_menuTIL);
-        year_autoCompleteTextView = findViewById(R.id.yearTV);
+        spinner_year = findViewById(R.id.spinner_year);
         String [] year_itemList = {"1st Year", "2nd Year", "3rd Year","4th Year"};
         ArrayAdapter<String> year_itemArrayAdapter = new ArrayAdapter<>(AdminPortal.this, R.layout.dropdown_item, year_itemList);
-        year_autoCompleteTextView.setAdapter(year_itemArrayAdapter);
-        year_autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                year_autoCompleteTextView.setText((String)parent.getItemAtPosition(position));
-                year = (String)parent.getItemAtPosition(position);
-            }
-        });
+        spinner_year.setAdapter(year_itemArrayAdapter);
+        year = spinner_year.getSelectedItem().toString();
 
-        branch_menuTIL = findViewById(R.id.branch_menuTIL);
-        branch_autoCompleteTextView = findViewById(R.id.branchTV);
+        spinner_branch = findViewById(R.id.spinner_branch);
         String [] branch_itemList = {"CSAI", "CS", "IT", "CSB"};
         ArrayAdapter<String> branch_itemArrayAdapter = new ArrayAdapter<>(AdminPortal.this, R.layout.dropdown_item, branch_itemList);
-        branch_autoCompleteTextView.setAdapter(branch_itemArrayAdapter);
-        branch_autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                branch_autoCompleteTextView.setText((String)parent.getItemAtPosition(position));
-                branch = (String)parent.getItemAtPosition(position);
-            }
-        });
+        spinner_branch.setAdapter(branch_itemArrayAdapter);
+        branch = spinner_branch.getSelectedItem().toString();
 
         float_electiveTV = findViewById(R.id.float_electiveTV);
         float_electiveTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // startActivity(new Intent(getApplicationContext(),FloatElective.class));
+                // startActivity(new Intent(getApplicationContext(),FloatElective.class));
                 Intent intent = new Intent(getApplicationContext(), FloatElective.class);
                 String [] dataString = new String[3];
                 dataString[0] = program;

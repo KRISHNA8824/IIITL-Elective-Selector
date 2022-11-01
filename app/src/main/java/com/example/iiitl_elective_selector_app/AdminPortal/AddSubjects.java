@@ -1,10 +1,14 @@
 package com.example.iiitl_elective_selector_app.AdminPortal;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatSpinner;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,42 +17,86 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.iiitl_elective_selector_app.R;
 import com.google.android.material.textfield.TextInputLayout;
 
-public class AddSubjects extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class AddSubjects extends AppCompatActivity implements View.OnClickListener{
     LinearLayout layoutList;
-    Button add_button;
+    Button add_button, finish_button;
     ImageView removeImage;
+    ArrayList<Elective> electiveArrayList = new ArrayList<>();
+    ArrayList<String> arrayList = new ArrayList<>();
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_subjects);
         layoutList = findViewById(R.id.layout_list);
+
         add_button = findViewById(R.id.add_button);
-        add_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        add_button.setOnClickListener(this);
+
+        finish_button = findViewById(R.id.finish_button);
+        finish_button.setOnClickListener(this);
+
+    }
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+
+            case R.id.add_button:
                 addView();
+                break;
+
+            case R.id.finish_button:
+
+                if(checkIfValidAndRead()){
+                    Intent intent = new Intent(getApplicationContext(),ShowElectives.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("list",electiveArrayList);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+
+                }
+                break;
+
+        }
+    }
+
+    private boolean checkIfValidAndRead() {
+        boolean result = true;
+
+        Elective elective = new Elective();
+        for(int i=0;i<layoutList.getChildCount();i++) {
+
+            View subjectView = layoutList.getChildAt(i);
+            EditText subject_name = (EditText) subjectView.findViewById(R.id.edit_subject_name);
+            if (!subject_name.getText().toString().equals("")) {
+                arrayList.add(subject_name.getText().toString());
             }
-        });
 
+        }
 
+        elective.setSubjectArrayList(arrayList);
+        electiveArrayList.add(elective);
+        return result;
     }
 
     private void addView(){
         final View subjectView  = getLayoutInflater().inflate(R.layout.row_add_subjects,null,false);
         EditText editText = (EditText) findViewById(R.id.edit_subject_name);
-//        removeImage = (ImageView)findViewById(R.id.image_remove);
+        removeImage = (ImageView)subjectView.findViewById(R.id.image_remove);
 
-//        removeImage.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                removeView(subjectView);
-//            }
-//        });
+        removeImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                removeView(subjectView);
+            }
+        });
         layoutList.addView(subjectView);
     }
     private void removeView(View view){
