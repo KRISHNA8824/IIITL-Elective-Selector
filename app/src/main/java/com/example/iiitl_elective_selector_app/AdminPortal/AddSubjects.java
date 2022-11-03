@@ -29,7 +29,7 @@ public class AddSubjects extends AppCompatActivity implements View.OnClickListen
     Button add_button, finish_button;
     ImageView removeImage;
     ArrayList<Elective> electiveArrayList = new ArrayList<>();
-    ArrayList<String> arrayList = new ArrayList<>();
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +71,7 @@ public class AddSubjects extends AppCompatActivity implements View.OnClickListen
         boolean result = true;
 
         Elective elective = new Elective();
+        ArrayList<String> arrayList = new ArrayList<>();
         for(int i=0;i<layoutList.getChildCount();i++) {
 
             View subjectView = layoutList.getChildAt(i);
@@ -80,9 +81,16 @@ public class AddSubjects extends AppCompatActivity implements View.OnClickListen
             }
 
         }
-
-        elective.setSubjectArrayList(arrayList);
-        electiveArrayList.add(elective);
+        if(arrayList.size() == 0){
+            result = false;
+            Toast.makeText(this,"Add Subjects First!",Toast.LENGTH_SHORT).show();
+        }else if(!result){
+            Toast.makeText(this,"Fill all credentials correctly",Toast.LENGTH_SHORT).show();
+        }
+        if(result == true && arrayList.size() != 0){
+            elective.setSubjectArrayList(arrayList);
+            electiveArrayList.add(elective);
+        }
         return result;
     }
 
