@@ -26,51 +26,48 @@
 
 
     </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/elective_recyclerView"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:layout_centerHorizontal="true"
+        ></androidx.recyclerview.widget.RecyclerView>
+
     <LinearLayout
-        android:id="@+id/linear_layout1"
-        android:layout_below="@+id/toolbar"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        >
-        <TextView
-            android:id="@+id/programTV"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_40sdp"
-            android:textSize="@dimen/_14sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_5sdp"
-            android:layout_marginLeft="@dimen/_60sdp"
-            />
-        <TextView
-            android:id="@+id/yearTV"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_40sdp"
-            android:textSize="@dimen/_14sdp"
-            android:layout_marginLeft="@dimen/_60sdp"
-            />
-        <TextView
-            android:id="@+id/branchTV"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_40sdp"
-            android:textSize="@dimen/_14sdp"
-            android:layout_marginLeft="@dimen/_60sdp"
-            />
-
-    </LinearLayout>
-    <TextView
-        android:id="@+id/addElectiveTV"
-        android:layout_below="@+id/linear_layout1"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Add Subjects "
-        android:textStyle="bold"
-        android:backgroundTint="@color/purple_700"
+        android:layout_gravity="center"
         android:layout_centerHorizontal="true"
-        android:textSize="@dimen/_20sdp"
-        android:background="@drawable/shape_item"
+        android:layout_below="@+id/elective_recyclerView"
+        >
+        <Button
+            android:layout_below="@+id/toolbar"
+            android:id="@+id/add_elective_button"
+            android:background="@drawable/round_primary"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="Add"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            android:paddingRight="10dp"
+            android:drawableRight="@drawable/ic_add"
+            ></Button>
 
+        <Button
+            android:id="@+id/float_elective_button"
+            android:layout_below="@+id/toolbar"
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/round_primary"
+            android:text="Float Elective"
+            android:textColor="@color/white"
+            android:layout_centerHorizontal="true"
 
-        />
+            android:layout_toRightOf="@+id/add_button"
+            ></Button>
+    </LinearLayout>
 </RelativeLayout>

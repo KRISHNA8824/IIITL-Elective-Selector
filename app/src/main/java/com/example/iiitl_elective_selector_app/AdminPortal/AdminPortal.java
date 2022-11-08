@@ -2,18 +2,25 @@ package com.example.iiitl_elective_selector_app.AdminPortal;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatSpinner;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.iiitl_elective_selector_app.MainActivity;
 import com.example.iiitl_elective_selector_app.R;
@@ -24,14 +31,20 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class AdminPortal extends AppCompatActivity {
 
     ImageView logout;
-    TextView float_electiveTV;
+    Button next_button;
     AppCompatSpinner spinner_program,spinner_year, spinner_branch;
     FirebaseAuth mAuth;
     String program , branch, year ;
+    ArrayList<Elective> electiveArrayList = new ArrayList<>();
+    RecyclerView show_electiveRecyclerView;
+    private static final int TIME_DELAY = 2000;
+    private static long back_pressed;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +59,16 @@ public class AdminPortal extends AppCompatActivity {
         program = spinner_program.getSelectedItem().toString();
 
         spinner_year = findViewById(R.id.spinner_year);
-        String [] year_itemList = {"1st Year", "2nd Year", "3rd Year","4th Year"};
+        ArrayList<String> year_itemList = new ArrayList<>();
+        if(Objects.equals(program, "B.Tech")){
+            year_itemList.add("1st Year");
+            year_itemList.add("2nd Year");
+            year_itemList.add("3rd Year");
+            year_itemList.add("4th Year");
+        }else{
+            year_itemList.add("1st Year");
+            year_itemList.add("2nd Year");
+        }
         ArrayAdapter<String> year_itemArrayAdapter = new ArrayAdapter<>(AdminPortal.this, R.layout.dropdown_item, year_itemList);
         spinner_year.setAdapter(year_itemArrayAdapter);
         year = spinner_year.getSelectedItem().toString();
@@ -57,24 +79,13 @@ public class AdminPortal extends AppCompatActivity {
         spinner_branch.setAdapter(branch_itemArrayAdapter);
         branch = spinner_branch.getSelectedItem().toString();
 
-        float_electiveTV = findViewById(R.id.float_electiveTV);
-        float_electiveTV.setOnClickListener(new View.OnClickListener() {
+        next_button = findViewById(R.id.next_button);
+        next_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // startActivity(new Intent(getApplicationContext(),FloatElective.class));
-                Intent intent = new Intent(getApplicationContext(), FloatElective.class);
-                String [] dataString = new String[3];
-                dataString[0] = program;
-                dataString[1] = year;
-                dataString[2] = branch;
-
-                intent.putExtra("stringArray", dataString);
-                startActivity(intent);
+                startActivity(new Intent(getApplicationContext(), FloatElective.class));
             }
         });
-
-
-
         logout = findViewById(R.id.logoutIV);
         mAuth = FirebaseAuth.getInstance();
 
@@ -93,4 +104,16 @@ public class AdminPortal extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    public void onBackPressed() {
+        if (back_pressed + TIME_DELAY > System.currentTimeMillis()) {
+            super.onBackPressed();
+        }else{
+            Toast.makeText(getBaseContext(), "Press once again to exit!",
+                    Toast.LENGTH_SHORT).show();
+        }
+        back_pressed = System.currentTimeMillis();
+    }
+
 }

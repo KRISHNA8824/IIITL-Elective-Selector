@@ -33,9 +33,11 @@
             android:contentDescription="Logout" />
 
     </LinearLayout>
+
     <LinearLayout
+        android:id="@+id/linear_layout1"
         android:layout_width="@dimen/_200sdp"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_centerHorizontal="true"
         android:layout_margin="@dimen/_5sdp"
@@ -82,25 +84,30 @@
                 android:layout_gravity="right"
                 android:layout_height="40dp"></androidx.appcompat.widget.AppCompatSpinner>
         </FrameLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_30sdp"
-            android:orientation="vertical"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:background="@drawable/round_primary"
-            android:gravity="center">
-            <TextView
-                android:id="@+id/float_electiveTV"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Float Elective"
-                android:gravity="center"
-                android:textSize="@dimen/_15sdp"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:background="@color/purple_500"
-                />
 
-        </LinearLayout>
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_below="@+id/linear_layout1"
+        android:id="@+id/elective_linear_layout"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+            <Button
+                android:id="@+id/next_button"
+                android:layout_below="@+id/toolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/round_primary"
+                android:text="Next"
+                android:textColor="@color/white"
+
+                ></Button>
+
+    </LinearLayout>
+
 </RelativeLayout>
