@@ -15,6 +15,20 @@
         android:theme="@style/Theme.IIITLElectiveSelectorApp"
         tools:targetApi="31">
         <activity
+            android:name=".Authentication.Details"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Electives"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".AdminPortal.ShowElectives"
             android:exported="false">
             <meta-data
@@ -45,7 +59,7 @@
             android:name=".StudentPortal.StudentPortal"
             android:exported="false" />
         <activity
-            android:name=".Authentication.Login"
+            android:name=".Authentication.LoginStudent"
             android:exported="false" />
         <activity
             android:name=".Authentication.Registration"

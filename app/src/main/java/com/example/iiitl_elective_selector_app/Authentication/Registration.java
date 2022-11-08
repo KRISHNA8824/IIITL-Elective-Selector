@@ -80,7 +80,7 @@ public class Registration extends AppCompatActivity {
             txt_signin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(Registration.this, Login.class));
+                    startActivity(new Intent(Registration.this, LoginStudent.class));
                 }
             });
 
@@ -128,7 +128,7 @@ public class Registration extends AppCompatActivity {
                                                     public void onComplete(@NonNull Task<AuthResult> task) {
                                                         if (task.isSuccessful()) {
                                                             DatabaseReference databaseReference = firebaseDatabase.getReference().child("user").child(mAuth.getUid());
-                                                            Users users = new Users(mAuth.getUid(), name, email, enrolment);
+                                                            Users users = new Users(mAuth.getUid(), name, email, enrolment, "", "", "");
                                                             databaseReference.setValue(users).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                 @Override
                                                                 public void onComplete(@NonNull Task<Void> task) {
@@ -137,7 +137,7 @@ public class Registration extends AppCompatActivity {
                                                                         reference1.setValue(email).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                             @Override
                                                                             public void onComplete(@NonNull Task<Void> task) {
-                                                                                startActivity(new Intent(Registration.this, Login.class));
+                                                                                startActivity(new Intent(Registration.this, LoginStudent.class));
                                                                                 progressDialog.dismiss();
                                                                                 Toast.makeText(getApplicationContext(), "Your account is created successfully", Toast.LENGTH_SHORT).show();
                                                                             }

@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">IIITL-Elective-Selector-App</string>
+    <string-array name="program">
+        <item>B.Tech</item>
+        <item>M.Tech</item>
+    </string-array>
+    <string-array name="year">
+        <item>1st Year</item>
+        <item>2nd Year</item>
+        <item>3rd Year</item>
+        <item>4th Year</item>
+    </string-array>
+    <string-array name="branch">
+        <item>CS</item>
+        <item>IT</item>
+        <item>CSAI</item>
+        <item>CSB</item>
+    </string-array>
 </resources>

@@ -6,10 +6,12 @@ import androidx.cardview.widget.CardView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.iiitl_elective_selector_app.AdminPortal.AdminPortal;
+import com.example.iiitl_elective_selector_app.Authentication.Details;
 import com.example.iiitl_elective_selector_app.Authentication.LoginAdmin;
-import com.example.iiitl_elective_selector_app.Authentication.Registration;
+import com.example.iiitl_elective_selector_app.Authentication.LoginStudent;
 import com.example.iiitl_elective_selector_app.StudentPortal.StudentPortal;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -29,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, AdminPortal.class));
             }
             else{
+                Toast.makeText(this, "oooooo" + mAuth.getUid(), Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(MainActivity.this, StudentPortal.class));
             }
         }
@@ -43,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         student.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Registration.class);
+                Intent intent = new Intent(MainActivity.this, LoginStudent.class);
                 startActivity(intent);
             }
         });
