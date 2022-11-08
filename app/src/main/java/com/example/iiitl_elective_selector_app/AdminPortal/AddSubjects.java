@@ -1,7 +1,4 @@
 package com.example.iiitl_elective_selector_app.AdminPortal;
-
-import static android.content.ContentValues.TAG;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatSpinner;
 
@@ -29,7 +26,7 @@ public class AddSubjects extends AppCompatActivity implements View.OnClickListen
     Button add_button, finish_button;
     ImageView removeImage;
     ArrayList<Elective> electiveArrayList = new ArrayList<>();
-
+    Elective elective;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +39,7 @@ public class AddSubjects extends AppCompatActivity implements View.OnClickListen
 
         finish_button = findViewById(R.id.finish_button);
         finish_button.setOnClickListener(this);
-
+        elective = (Elective) getIntent().getExtras().getSerializable("Elective");
     }
     @Override
     public void onClick(View v) {
@@ -55,10 +52,8 @@ public class AddSubjects extends AppCompatActivity implements View.OnClickListen
             case R.id.finish_button:
 
                 if(checkIfValidAndRead()){
-                    Intent intent = new Intent(getApplicationContext(),ShowElectives.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("list",electiveArrayList);
-                    intent.putExtras(bundle);
+                    Intent intent = new Intent(getApplicationContext(),AdminPortal.class);
+
                     startActivity(intent);
 
                 }
@@ -69,8 +64,6 @@ public class AddSubjects extends AppCompatActivity implements View.OnClickListen
 
     private boolean checkIfValidAndRead() {
         boolean result = true;
-
-        Elective elective = new Elective();
         ArrayList<String> arrayList = new ArrayList<>();
         for(int i=0;i<layoutList.getChildCount();i++) {
 
@@ -89,7 +82,6 @@ public class AddSubjects extends AppCompatActivity implements View.OnClickListen
         }
         if(result == true && arrayList.size() != 0){
             elective.setSubjectArrayList(arrayList);
-            electiveArrayList.add(elective);
         }
         return result;
     }

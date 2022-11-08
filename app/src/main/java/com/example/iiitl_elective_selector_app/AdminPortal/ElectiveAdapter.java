@@ -1,23 +1,23 @@
 package com.example.iiitl_elective_selector_app.AdminPortal;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.iiitl_elective_selector_app.R;
-
 import java.util.ArrayList;
 
 public class ElectiveAdapter extends RecyclerView.Adapter<ElectiveAdapter.ElectiveView>{
     ArrayList<Elective> electiveList = new ArrayList<>();
-
-    public ElectiveAdapter(ArrayList<Elective> electiveList) {
+    Context context;
+    public ElectiveAdapter(Context applicationContext, ArrayList<Elective> electiveList) {
         this.electiveList = electiveList;
+        this.context = applicationContext;
     }
 
     @NonNull
@@ -39,13 +39,19 @@ public class ElectiveAdapter extends RecyclerView.Adapter<ElectiveAdapter.Electi
              holder.subjectsName.append(s);
              holder.subjectsName.append("\n");
 
-
          }
-//        if(arrayList.size() != 0){
-//            holder.subjectsName.setText(arrayList.get(0));
-//        }else{
-//            holder.subjectsName.setText("Subject Name");
-//        }
+         holder.itemView.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 Intent intent = new Intent(context, AddSubjects.class);
+                 Bundle bundle = new Bundle();
+                 bundle.putSerializable("Elective",elective);
+                 intent.putExtras(bundle);
+
+                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                 context.startActivity(intent);
+             }
+         });
 
 
     }
