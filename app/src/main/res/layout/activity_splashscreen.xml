@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SplashScreen"
-    android:background="@color/purple_700">
+    android:background="@color/white">
     <!--#5D23AF-->
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,17 +25,17 @@
             android:text="Welcome To"
             android:layout_margin="@dimen/_10sdp"
             android:textSize="@dimen/_20sdp"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:fontFamily="@font/spartan_bold"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="IIITL Elective Selector App"
+            android:text="IIITL Elective Selector"
             android:layout_margin="@dimen/_10sdp"
             android:textSize="@dimen/_15sdp"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:fontFamily="@font/spartan_bold"/>
 
     </LinearLayout>
@@ -49,8 +49,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="From : IIITL"
-            android:textColor="@color/white"
+            android:text="By : IIITL Students"
+            android:textColor="@color/black"
             android:textSize="@dimen/_18sdp"
             android:gravity="center"
             android:layout_margin="@dimen/_10sdp"

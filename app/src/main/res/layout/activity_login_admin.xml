@@ -15,16 +15,6 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Welcome Back"
-            android:gravity="center"
-            android:textSize="@dimen/_16sdp"
-            android:fontFamily="@font/spartan_bold"
-            android:textStyle="bold"
-            android:layout_marginBottom="@dimen/_10sdp"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:text="Please sign in to continue"
             android:textSize="@dimen/_13sdp"
             android:fontFamily="@font/spartan_regular"
@@ -35,7 +25,7 @@
             android:id="@+id/login_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Institutional Email Id"
+            android:hint="Email Id"
             android:textSize="@dimen/_12sdp"
             android:fontFamily="@font/spartan_regular"
             android:background="@drawable/edit_text_shape"

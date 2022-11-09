@@ -81,6 +81,7 @@ public class LoginAdmin extends AppCompatActivity {
                                 progressDialog.dismiss();
                                 Toast.makeText(LoginAdmin.this, "Welcome to administration page.", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(LoginAdmin.this, AdminPortal.class));
+                                finish();
                             }
                             else{
                                 progressDialog.dismiss();
