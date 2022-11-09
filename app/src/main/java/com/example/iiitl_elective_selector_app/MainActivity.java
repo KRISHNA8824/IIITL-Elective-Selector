@@ -29,10 +29,12 @@ public class MainActivity extends AppCompatActivity {
         if(mAuth.getCurrentUser() != null){
             if(mAuth.getCurrentUser().getEmail().equals("admin@gmail.com")){
                 startActivity(new Intent(MainActivity.this, AdminPortal.class));
+                finish();
             }
             else{
                 Toast.makeText(this, "oooooo" + mAuth.getUid(), Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(MainActivity.this, StudentPortal.class));
+                finish();
             }
         }
         admin.setOnClickListener(new View.OnClickListener() {
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, LoginAdmin.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -48,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, LoginStudent.class);
                 startActivity(intent);
+                finish();
             }
         });
 
