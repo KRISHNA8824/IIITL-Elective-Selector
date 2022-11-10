@@ -19,7 +19,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.iiitl_elective_selector_app.Authentication.Details;
+import com.example.iiitl_elective_selector_app.Authentication.LoginStudent;
 import com.example.iiitl_elective_selector_app.R;
+import com.example.iiitl_elective_selector_app.StudentPortal.StudentPortal;
 import com.example.iiitl_elective_selector_app.Users;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -62,7 +65,8 @@ public class AddSubjects extends AppCompatActivity implements View.OnClickListen
 
             case R.id.finish_button:
                 if(checkIfValidAndRead()){
-//                    Toast.makeText(this,"Finished",Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getApplicationContext(),FloatElective.class));
+                    Toast.makeText(this,"Elective Added Successfully",Toast.LENGTH_SHORT).show();
                 }
                 break;
 
@@ -109,7 +113,9 @@ public class AddSubjects extends AppCompatActivity implements View.OnClickListen
             String year = intent.getStringExtra("year");
             String branch = intent.getStringExtra("branch");
             String new_program = program.substring(0,1) + program.substring(2);
-            DatabaseReference reference = firebaseDatabase.getReference().child("Electives").child(new_program).child(year).child(branch);
+            DatabaseReference reference = firebaseDatabase.getReference().child("Electives")
+                    .child(new_program).child(year).child(branch);
+
             reference.setValue(elective);
         }
         return result;
