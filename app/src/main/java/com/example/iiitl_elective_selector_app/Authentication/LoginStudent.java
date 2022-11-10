@@ -109,7 +109,7 @@ public class LoginStudent extends AppCompatActivity {
                     Toast.makeText(this, "Please select your collage email-id.", Toast.LENGTH_SHORT).show();
                     signOut();
                 }
-                firebaseAuthWithGoogle(account.getIdToken());
+                else firebaseAuthWithGoogle(account.getIdToken());
 
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
@@ -117,7 +117,6 @@ public class LoginStudent extends AppCompatActivity {
                 Toast.makeText(this, "error "+e, Toast.LENGTH_SHORT).show();
             }
 
-            progressDialog.dismiss();
         }
     }
 
@@ -138,7 +137,6 @@ public class LoginStudent extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            progressDialog.dismiss();
 
                             DatabaseReference reference31 = FirebaseDatabase.getInstance().getReference().child("Registered Users");
                             reference31.child(mAuth.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -146,28 +144,30 @@ public class LoginStudent extends AppCompatActivity {
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                     if(dataSnapshot.exists()){
                                         // user exists in the database
-
+                                        progressDialog.dismiss();
                                         startActivity(new Intent(LoginStudent.this, StudentPortal.class));
                                         Toast.makeText(getApplicationContext(), "You have successfully signed in.", Toast.LENGTH_SHORT).show();
 
                                     }else{
                                         // user does not exist in the database
-
                                         Intent intent = new Intent(LoginStudent.this, Details.class);
                                         intent.putExtra("userName", name);
                                         intent.putExtra("userEmail", email);
+                                        progressDialog.dismiss();
                                         startActivity(intent);
                                     }
                                 }
 
                                 @Override
                                 public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    progressDialog.dismiss();
                                     Toast.makeText(LoginStudent.this, "Error: " + databaseError, Toast.LENGTH_SHORT).show();
                                 }
                             });
 
                         } else {
                             // If sign in fails, display a message to the user.
+                            progressDialog.dismiss();
                             Log.w("MainActivity", "signInWithCredential:failure", task.getException());
                         }
                     }

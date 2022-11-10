@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
             else{
-                Toast.makeText(this, "oooooo" + mAuth.getUid(), Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(MainActivity.this, StudentPortal.class));
                 finish();
             }

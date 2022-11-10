@@ -116,14 +116,35 @@ public class Details extends AppCompatActivity {
                  String year = autoCompleteTextView2.getText().toString();
                  String branch = autoCompleteTextView3.getText().toString();
 
-                 DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Registered Users").child(mAuth.getUid());
-                 Users user = new Users(mAuth.getUid(), userName, userEmail, userEnrolment, program, year, branch);
-                 databaseReference.setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                     @Override
-                     public void onComplete(@NonNull Task<Void> task) {
-                         if (task.isSuccessful()) {
-                             progressDialog.dismiss();
-                             startActivity(new Intent(Details.this, StudentPortal.class));
+                 if(name.getText().toString().matches("")){
+                     progressDialog.dismiss();
+                     Toast.makeText(Details.this, "Please fill your name.", Toast.LENGTH_SHORT).show();
+                 }
+                 else if(enrolmentNumber.getText().toString().matches("")) {
+                     progressDialog.dismiss();
+                     Toast.makeText(Details.this, "Please fill your enrolment number.", Toast.LENGTH_SHORT).show();
+                 }
+                 else if(program.equals("Choose Program")) {
+                     progressDialog.dismiss();
+                     Toast.makeText(Details.this, "Please choose program.", Toast.LENGTH_SHORT).show();
+                 }
+                 else if(year.equals("Choose Year")){
+                     progressDialog.dismiss();
+                     Toast.makeText(Details.this, "Please choose year.", Toast.LENGTH_SHORT).show();
+                 }
+                 else if(branch.equals("Choose Branch")){
+                     progressDialog.dismiss();
+                     Toast.makeText(Details.this, "Please choose your branch.", Toast.LENGTH_SHORT).show();
+                 }
+                 else {
+                     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Registered Users").child(mAuth.getUid());
+                     Users user = new Users(mAuth.getUid(), userName, userEmail, userEnrolment, program, year, branch);
+                     databaseReference.setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                         @Override
+                         public void onComplete(@NonNull Task<Void> task) {
+                             if (task.isSuccessful()) {
+                                 progressDialog.dismiss();
+                                 startActivity(new Intent(Details.this, StudentPortal.class));
 
                              /*
                              DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("Registered Enrolment").child(userEnrolment);
@@ -138,12 +159,13 @@ public class Details extends AppCompatActivity {
 
                               */
 
-                         } else {
-                             progressDialog.dismiss();
-                             Toast.makeText(Details.this, "Error occurred", Toast.LENGTH_SHORT).show();
+                             } else {
+                                 progressDialog.dismiss();
+                                 Toast.makeText(Details.this, "Error occurred", Toast.LENGTH_SHORT).show();
+                             }
                          }
-                     }
-                 });
+                     });
+                 }
 
              }
          });
