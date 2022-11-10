@@ -41,6 +41,7 @@ public class StudentPortal extends AppCompatActivity {
                 GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(StudentPortal.this, gso);
                 mGoogleSignInClient.signOut();
                 startActivity(new Intent(StudentPortal.this, MainActivity.class));
+                finishAffinity();
             }
         });
 
