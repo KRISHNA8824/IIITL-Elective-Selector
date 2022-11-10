@@ -7,17 +7,25 @@
     android:paddingBottom="5dp">
 
     <EditText
-        android:id="@+id/edit_subject_name"
+        android:id="@+id/subject_nameET"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="5dp"
         android:background="@drawable/round_grey"
-        android:layout_weight="1"
         android:hint="Subjects Name"
         android:textSize="14sp"
-        android:paddingLeft="10dp"
         android:textColor="@color/black"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/_160sdp"
         android:layout_height="40dp"></EditText>
+
+    <EditText
+        android:id="@+id/faculty_nameET"
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="match_parent"
+        android:background="@drawable/round_grey"
+        android:textSize="@dimen/_10sdp"
+        android:gravity="center"
+        android:hint="Faculty Name"
+        ></EditText>
 
     <ImageView
         android:id="@+id/image_remove"
@@ -26,6 +34,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginLeft="5dp"
         android:layout_gravity="center_vertical"
-        android:src="@drawable/ic_close"></ImageView>
+        android:src="@drawable/ic_close"
+        ></ImageView>
 
 </LinearLayout>

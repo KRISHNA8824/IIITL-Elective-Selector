@@ -24,11 +24,13 @@ import android.widget.Toast;
 
 import com.example.iiitl_elective_selector_app.MainActivity;
 import com.example.iiitl_elective_selector_app.R;
+import com.example.iiitl_elective_selector_app.Users;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.auth.User;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -40,8 +42,6 @@ public class AdminPortal extends AppCompatActivity {
     AppCompatSpinner spinner_program,spinner_year, spinner_branch;
     FirebaseAuth mAuth;
     String program , branch, year ;
-    ArrayList<Elective> electiveArrayList = new ArrayList<>();
-    RecyclerView show_electiveRecyclerView;
     private static final int TIME_DELAY = 2000;
     private static long back_pressed;
 
@@ -83,7 +83,11 @@ public class AdminPortal extends AppCompatActivity {
         next_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), FloatElective.class));
+                Intent intent = new Intent(getApplicationContext(), FloatElective.class);
+                intent.putExtra("program", program);
+                intent.putExtra("year", year);
+                intent.putExtra("branch", branch);
+                startActivity(intent);
             }
         });
         logout = findViewById(R.id.logoutIV);

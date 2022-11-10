@@ -1,5 +1,6 @@
 package com.example.iiitl_elective_selector_app.AdminPortal;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,7 +14,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.iiitl_elective_selector_app.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -23,27 +30,31 @@ public class FloatElective extends AppCompatActivity {
     RecyclerView elective_RecyclerView;
     Button add_elective_button, float_elective_button;
     ArrayList<Elective> electiveArrayList = new ArrayList<>();
+    FirebaseAuth mAuth;
+    FirebaseDatabase firebaseDatabase;
+    FirebaseStorage firebaseStorage;
+
     @SuppressLint({"MissingInflatedId", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_float_elective);
-
+        Intent intent = getIntent();
         add_elective_button = findViewById(R.id.add_elective_button);
         add_elective_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Elective elective = new Elective();
-                elective.setSubjectArrayList(new ArrayList<>());
-                electiveArrayList.add(elective);
-                elective_RecyclerView = findViewById(R.id.elective_recyclerView);
-                elective_RecyclerView.setHasFixedSize(true);
-                elective_RecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                ElectiveAdapter electiveAdapter = new ElectiveAdapter(getApplicationContext(),electiveArrayList);
-                elective_RecyclerView.setAdapter(electiveAdapter);
-
+               String program = intent.getStringExtra("program");
+               String year = intent.getStringExtra("year");
+               String branch = intent.getStringExtra("branch");
+               Intent new_intent = new Intent(getApplicationContext(),AddSubjects.class);
+                new_intent.putExtra("program", program);
+                new_intent.putExtra("year", year);
+                new_intent.putExtra("branch", branch);
+                startActivity(new_intent);
             }
         });
+
 
         float_elective_button = findViewById(R.id.float_elective_button);
         float_elective_button.setOnClickListener(new View.OnClickListener() {
@@ -55,7 +66,8 @@ public class FloatElective extends AppCompatActivity {
                    boolean flag = false;
                  for(int i=0;i<electiveArrayList.size();i++){
                      ArrayList<String> arrayList = electiveArrayList.get(i).subjectArrayList;
-                     if(arrayList.size() == 0){
+                     String number = electiveArrayList.get(i).numberOfSeats;
+                     if(arrayList.size() == 0 || number.equals("")){
                          flag = true;
                          break;
                      }
@@ -63,7 +75,15 @@ public class FloatElective extends AppCompatActivity {
                  if(flag){
                      Toast.makeText(getApplicationContext(),"Add Electives First",Toast.LENGTH_SHORT).show();
                  }else{
-                     Toast.makeText(getApplicationContext(),"Elective Floated Successfully",Toast.LENGTH_SHORT).show();
+                     for(int i=0;i<electiveArrayList.size();i++){
+
+                         Elective elective = electiveArrayList.get(i);
+                         String program = intent.getStringExtra("program");
+                         String year = intent.getStringExtra("year");
+                         String branch = intent.getStringExtra("branch");
+                         int electiveID = i+1;
+
+                     }
 
                  }
                }

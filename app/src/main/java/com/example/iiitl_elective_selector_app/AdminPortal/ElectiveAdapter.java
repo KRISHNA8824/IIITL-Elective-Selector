@@ -1,23 +1,41 @@
 package com.example.iiitl_elective_selector_app.AdminPortal;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.iiitl_elective_selector_app.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+
 import java.util.ArrayList;
 
 public class ElectiveAdapter extends RecyclerView.Adapter<ElectiveAdapter.ElectiveView>{
     ArrayList<Elective> electiveList = new ArrayList<>();
     Context context;
+
     public ElectiveAdapter(Context applicationContext, ArrayList<Elective> electiveList) {
         this.electiveList = electiveList;
         this.context = applicationContext;
+
     }
 
     @NonNull
@@ -40,18 +58,6 @@ public class ElectiveAdapter extends RecyclerView.Adapter<ElectiveAdapter.Electi
              holder.subjectsName.append("\n");
 
          }
-         holder.itemView.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-                 Intent intent = new Intent(context, AddSubjects.class);
-                 Bundle bundle = new Bundle();
-                 bundle.putSerializable("Elective",elective);
-                 intent.putExtras(bundle);
-
-                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                 context.startActivity(intent);
-             }
-         });
 
 
     }
