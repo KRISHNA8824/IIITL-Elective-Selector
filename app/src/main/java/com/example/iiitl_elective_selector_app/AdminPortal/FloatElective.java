@@ -47,6 +47,8 @@ public class FloatElective extends AppCompatActivity {
                String program = intent.getStringExtra("program");
                String year = intent.getStringExtra("year");
                String branch = intent.getStringExtra("branch");
+
+//                Toast.makeText(FloatElective.this, program + " " + year + " " + branch, Toast.LENGTH_SHORT).show();
                Intent new_intent = new Intent(getApplicationContext(),AddSubjects.class);
                 new_intent.putExtra("program", program);
                 new_intent.putExtra("year", year);
