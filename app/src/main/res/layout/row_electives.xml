@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardBackgroundColor="@color/white"
     android:orientation="vertical"
     >
     <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/elective_row_LinearLayout"
+        android:layout_width="@dimen/_200sdp"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:orientation="vertical"
-        android:layout_margin="@dimen/_5sdp"
         android:background="@drawable/shape_item"
         >
         <TextView
@@ -32,4 +32,5 @@
 
     </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+
+</RelativeLayout>

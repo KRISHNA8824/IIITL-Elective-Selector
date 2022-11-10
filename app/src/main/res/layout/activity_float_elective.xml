@@ -29,8 +29,9 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/elective_recyclerView"
-        android:layout_width="@dimen/_250sdp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_5sdp"
         android:layout_below="@id/toolbar"
         android:layout_centerHorizontal="true"
         ></androidx.recyclerview.widget.RecyclerView>
@@ -49,7 +50,7 @@
             android:background="@drawable/round_primary"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:text="Add"
+            android:text="Add Elective"
             android:layout_marginTop="10dp"
             android:textColor="@color/white"
             android:paddingRight="10dp"
