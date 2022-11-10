@@ -100,6 +100,7 @@ public class AdminPortal extends AppCompatActivity {
                 GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(AdminPortal.this, gso);
                 mGoogleSignInClient.signOut();
                 startActivity(new Intent(AdminPortal.this, MainActivity.class));
+                finishAffinity();
             }
         });
 

@@ -145,7 +145,7 @@ public class Details extends AppCompatActivity {
                              if (task.isSuccessful()) {
                                  progressDialog.dismiss();
                                  startActivity(new Intent(Details.this, StudentPortal.class));
-
+                                 finishAffinity();
                              /*
                              DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference().child("Registered Enrolment").child(userEnrolment);
                              reference1.setValue(mAuth.getCurrentUser().getEmail()).addOnCompleteListener(new OnCompleteListener<Void>() {

@@ -87,6 +87,7 @@ public class LoginStudent extends AppCompatActivity {
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
+
     }
 
 
@@ -108,6 +109,7 @@ public class LoginStudent extends AppCompatActivity {
                 if(!email.substring(idx).equals("@iiitl.ac.in")) {
                     Toast.makeText(this, "Please select your collage email-id.", Toast.LENGTH_SHORT).show();
                     signOut();
+                    progressDialog.dismiss();
                 }
                 else firebaseAuthWithGoogle(account.getIdToken());
 
@@ -115,6 +117,7 @@ public class LoginStudent extends AppCompatActivity {
                 // Google Sign In failed, update UI appropriately
                 Log.w("MainActivity", "Google sign in failed", e);
                 Toast.makeText(this, "error "+e, Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
             }
 
         }
@@ -146,6 +149,7 @@ public class LoginStudent extends AppCompatActivity {
                                         // user exists in the database
                                         progressDialog.dismiss();
                                         startActivity(new Intent(LoginStudent.this, StudentPortal.class));
+                                        finishAffinity();
                                         Toast.makeText(getApplicationContext(), "You have successfully signed in.", Toast.LENGTH_SHORT).show();
 
                                     }else{
@@ -155,6 +159,7 @@ public class LoginStudent extends AppCompatActivity {
                                         intent.putExtra("userEmail", email);
                                         progressDialog.dismiss();
                                         startActivity(intent);
+                                        finishAffinity();
                                     }
                                 }
 
