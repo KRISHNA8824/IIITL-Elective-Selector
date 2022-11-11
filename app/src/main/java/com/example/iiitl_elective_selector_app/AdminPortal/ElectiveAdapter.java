@@ -52,12 +52,12 @@ public class ElectiveAdapter extends RecyclerView.Adapter<ElectiveAdapter.Electi
         holder.electiveNumber.setText("Elective "+ String.valueOf(position+1));
 
         ArrayList<String> arrayList = elective.getSubjectArrayList();
-         for(int i=0;i<arrayList.size();i++){
+        for(int i=0;i<arrayList.size();i++){
              String s = arrayList.get(i);
              holder.subjectsName.append(s);
              holder.subjectsName.append("\n");
 
-         }
+        }
 
 
     }
