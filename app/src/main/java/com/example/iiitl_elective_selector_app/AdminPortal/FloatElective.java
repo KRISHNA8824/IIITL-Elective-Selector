@@ -9,11 +9,13 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.iiitl_elective_selector_app.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,66 +35,73 @@ public class FloatElective extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseDatabase firebaseDatabase;
     FirebaseStorage firebaseStorage;
-
+    String program,year,branch;
+    int count_elective;
     @SuppressLint({"MissingInflatedId", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_float_elective);
         Intent intent = getIntent();
-        add_elective_button = findViewById(R.id.add_elective_button);
-        add_elective_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               String program = intent.getStringExtra("program");
-               String year = intent.getStringExtra("year");
-               String branch = intent.getStringExtra("branch");
+        program = intent.getStringExtra("program");
+        year = intent.getStringExtra("year");
+        branch = intent.getStringExtra("branch");
 
-//                Toast.makeText(FloatElective.this, program + " " + year + " " + branch, Toast.LENGTH_SHORT).show();
-               Intent new_intent = new Intent(getApplicationContext(),AddSubjects.class);
+        FloatingActionButton fab = findViewById(R.id.addElective);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(FloatElective.this, program + " " + year + " " + branch, Toast.LENGTH_SHORT).show();
+                Intent new_intent = new Intent(getApplicationContext(),AddSubjects.class);
                 new_intent.putExtra("program", program);
                 new_intent.putExtra("year", year);
                 new_intent.putExtra("branch", branch);
                 startActivity(new_intent);
             }
         });
+//        add_elective_button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+////
+//////                Toast.makeText(FloatElective.this, program + " " + year + " " + branch, Toast.LENGTH_SHORT).show();
+////               Intent new_intent = new Intent(getApplicationContext(),AddSubjects.class);
+////                new_intent.putExtra("program", program);
+////                new_intent.putExtra("year", year);
+////                new_intent.putExtra("branch", branch);
+////                startActivity(new_intent);
+//            }
+//        });
 
+        RecyclerView recyclerView = findViewById(R.id.elective_recyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        ElectiveAdapter electiveAdapter = new ElectiveAdapter(getApplicationContext(),electiveArrayList);
+        recyclerView.setAdapter(electiveAdapter);
+        String new_program = program.substring(0,1) + program.substring(2);
 
-        float_elective_button = findViewById(R.id.float_elective_button);
-        float_elective_button.setOnClickListener(new View.OnClickListener() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Electives").child(new_program).child(year).child(branch);
+
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View v) {
-               if(electiveArrayList.size() == 0){
-                   Toast.makeText(getApplicationContext(),"Add Electives First",Toast.LENGTH_SHORT).show();
-               }else{
-                   boolean flag = false;
-                 for(int i=0;i<electiveArrayList.size();i++){
-                     ArrayList<String> arrayList = electiveArrayList.get(i).subjectArrayList;
-                     String number = electiveArrayList.get(i).numberOfSeats;
-                     if(arrayList.size() == 0 || number.equals("")){
-                         flag = true;
-                         break;
-                     }
-                 }
-                 if(flag){
-                     Toast.makeText(getApplicationContext(),"Add Electives First",Toast.LENGTH_SHORT).show();
-                 }else{
-                     for(int i=0;i<electiveArrayList.size();i++){
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.hasChildren()){
+                    count_elective = 1;
+                    for(DataSnapshot dataSnapshot: snapshot.getChildren()){
 
-                         Elective elective = electiveArrayList.get(i);
-                         String program = intent.getStringExtra("program");
-                         String year = intent.getStringExtra("year");
-                         String branch = intent.getStringExtra("branch");
-                         int electiveID = i+1;
+                        Elective elective = dataSnapshot.getValue(Elective.class);
+                        electiveArrayList.add(elective);
+                        count_elective++;
+                    }
+                    electiveAdapter.notifyDataSetChanged();
+                }
+            }
 
-                     }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
-                 }
-               }
             }
         });
-
-
 
     }
 //    @Override

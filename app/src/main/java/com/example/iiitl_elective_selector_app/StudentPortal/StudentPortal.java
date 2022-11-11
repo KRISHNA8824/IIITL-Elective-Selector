@@ -1,6 +1,9 @@
 package com.example.iiitl_elective_selector_app.StudentPortal;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -15,8 +18,14 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class StudentPortal extends AppCompatActivity {
 
@@ -45,5 +54,45 @@ public class StudentPortal extends AppCompatActivity {
             }
         });
 
+        /*
+
+        final RecyclerView recyclerView = findViewById(R.id.elective_list);
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference("Books");
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        HashMap<String, ArrayList<Book>> book_map = new HashMap<String, ArrayList<Book>>();
+        ArrayList<Book> list = new ArrayList<>();
+        BookAdapter adapter = new BookAdapter(getApplicationContext(),list,book_map);
+        recyclerView.setAdapter(adapter);
+        database.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.hasChildren()){
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                        Book book = dataSnapshot.getValue(Book.class);
+                        assert book != null;
+                        String s = book.getCategory();
+                        ArrayList<Book> temp = new ArrayList<>();
+                        if(book_map.containsKey(s)){
+                            temp = book_map.get(s);
+                            temp.add(book);
+                            book_map.put(s,temp);
+                        }else {
+                            temp.add(book);
+                            list.add(book);
+                            book_map.put(s, temp);
+                            temp=null;
+                        }
+                    }
+                    adapter.notifyDataSetChanged();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+        */
     }
 }

@@ -24,6 +24,8 @@ import com.example.iiitl_elective_selector_app.Authentication.LoginStudent;
 import com.example.iiitl_elective_selector_app.R;
 import com.example.iiitl_elective_selector_app.StudentPortal.StudentPortal;
 import com.example.iiitl_elective_selector_app.Users;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -115,8 +117,30 @@ public class AddSubjects extends AppCompatActivity implements View.OnClickListen
             String new_program = program.substring(0,1) + program.substring(2);
             DatabaseReference reference = firebaseDatabase.getReference().child("Electives")
                     .child(new_program).child(year).child(branch);
+            count_electives = 1;
 
-            reference.setValue(elective);
+            reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.exists()) {
+//                        Toast.makeText(AddSubjects.this, "hihihi", Toast.LENGTH_SHORT).show();
+                        for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                            count_electives++;
+                        }
+                        reference.child("Elective" + count_electives).setValue(elective);
+                    }
+                    else {
+                        reference.child("Elective" + count_electives).setValue(elective);
+//                        Toast.makeText(AddSubjects.this, "kkk", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
         }
         return result;
     }

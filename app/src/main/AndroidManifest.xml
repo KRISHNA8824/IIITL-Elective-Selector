@@ -15,6 +15,20 @@
         android:theme="@style/Theme.IIITLElectiveSelectorApp"
         tools:targetApi="31">
         <activity
+            android:name=".AdminPortal.AdminSubjectList"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".StudentPortal.SubjectList"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Authentication.Details"
             android:exported="false">
             <meta-data
@@ -28,7 +42,6 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
         <activity
             android:name=".AdminPortal.AdminPortal"
             android:exported="false">

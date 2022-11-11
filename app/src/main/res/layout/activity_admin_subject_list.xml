@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdminPortal.FloatElective">
+    tools:context=".AdminPortal.AdminSubjectList">
+
     <LinearLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -16,7 +17,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Float Elective"
+            android:text="Subjects"
 
             android:textSize="@dimen/_16sdp"
             android:layout_weight="1"
@@ -24,11 +25,10 @@
             android:gravity="center"
             android:layout_marginStart="@dimen/_10sdp"/>
 
-
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/elective_recyclerView"
+        android:id="@+id/subject_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_5sdp"
@@ -36,18 +36,4 @@
         android:layout_centerHorizontal="true"
         ></androidx.recyclerview.widget.RecyclerView>
 
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addElective"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:contentDescription="Add Elective"
-        android:src="@drawable/ic_baseline_add_24" />
 </RelativeLayout>
