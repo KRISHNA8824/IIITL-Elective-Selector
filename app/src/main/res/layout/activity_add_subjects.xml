@@ -26,22 +26,11 @@
             android:layout_marginStart="@dimen/_10sdp"/>
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_below="@+id/toolbar"
-        android:id="@+id/layout_list"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="vertical"
-        android:layout_marginTop="@dimen/_10sdp">
-
-    </LinearLayout>
-    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/elective_row_LinearLayout"
-        >
+        android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -51,6 +40,7 @@
             android:layout_marginRight="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:hint="Number of Seats">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -65,6 +55,15 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/layout_list"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+    </LinearLayout>
 
         <Button
             android:layout_below="@+id/toolbar"
