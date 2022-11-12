@@ -6,14 +6,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.iiitl_elective_selector_app.Authentication.LoginStudent;
 import com.example.iiitl_elective_selector_app.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,11 +40,20 @@ public class FloatElective extends AppCompatActivity {
     FirebaseStorage firebaseStorage;
     String program,year,branch;
     int count_elective;
+    ImageView backPressButton;
+    ProgressDialog progressDialog;
     @SuppressLint({"MissingInflatedId", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_float_elective);
+
+
+        progressDialog = new ProgressDialog(FloatElective.this);
+        progressDialog.setMessage("Please wait...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
         Intent intent = getIntent();
         program = intent.getStringExtra("program");
         year = intent.getStringExtra("year");
@@ -59,19 +71,14 @@ public class FloatElective extends AppCompatActivity {
                 startActivity(new_intent);
             }
         });
-//        add_elective_button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-////
-//////                Toast.makeText(FloatElective.this, program + " " + year + " " + branch, Toast.LENGTH_SHORT).show();
-////               Intent new_intent = new Intent(getApplicationContext(),AddSubjects.class);
-////                new_intent.putExtra("program", program);
-////                new_intent.putExtra("year", year);
-////                new_intent.putExtra("branch", branch);
-////                startActivity(new_intent);
-//            }
-//        });
+
+        backPressButton = findViewById(R.id.back_press);
+        backPressButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         RecyclerView recyclerView = findViewById(R.id.elective_recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -94,6 +101,7 @@ public class FloatElective extends AppCompatActivity {
                         count_elective++;
                     }
                     electiveAdapter.notifyDataSetChanged();
+                    progressDialog.dismiss();
                 }
             }
 
@@ -104,9 +112,5 @@ public class FloatElective extends AppCompatActivity {
         });
 
     }
-//    @Override
-//    public void onBackPressed() {
-//        startActivity(new Intent(this, AdminPortal.class));
-//    }
 
 }

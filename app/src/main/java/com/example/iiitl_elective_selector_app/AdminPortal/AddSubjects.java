@@ -1,5 +1,7 @@
 package com.example.iiitl_elective_selector_app.AdminPortal;
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatSpinner;
 
@@ -9,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -41,9 +44,10 @@ import java.util.ArrayList;
 public class AddSubjects extends AppCompatActivity implements View.OnClickListener{
     LinearLayout layoutList;
     Button add_button, finish_button;
-    ImageView removeImage;
+    ImageView removeImage, backPressButton;
     Intent intent;
     int count_electives = 0;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +61,21 @@ public class AddSubjects extends AppCompatActivity implements View.OnClickListen
 
         finish_button = findViewById(R.id.finish_button);
         finish_button.setOnClickListener(this);
+
+        backPressButton = findViewById(R.id.back_press);
+        backPressButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+
     }
+
+
+
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
