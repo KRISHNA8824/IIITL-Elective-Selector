@@ -26,6 +26,7 @@ import com.example.iiitl_elective_selector_app.StudentPortal.StudentPortal;
 import com.example.iiitl_elective_selector_app.Users;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -82,8 +83,8 @@ public class AddSubjects extends AppCompatActivity implements View.OnClickListen
         for(int i=0;i<layoutList.getChildCount();i++) {
 
             View subjectView = layoutList.getChildAt(i);
-            EditText subject_name = (EditText) subjectView.findViewById(R.id.subject_nameET);
-            EditText facultyName = (EditText) subjectView.findViewById(R.id.faculty_nameET);
+            TextInputEditText subject_name = subjectView.findViewById(R.id.subject_nameET);
+            TextInputEditText facultyName = subjectView.findViewById(R.id.faculty_nameET);
             if (!subject_name.getText().toString().equals("") && !facultyName.getText().toString().equals("") ){
                 arrayList.add(subject_name.getText().toString());
                 facultyArrayList.add(facultyName.getText().toString());
@@ -101,7 +102,7 @@ public class AddSubjects extends AppCompatActivity implements View.OnClickListen
         }
         if(result == true && arrayList.size() != 0){
             Elective elective = new Elective();
-            EditText number_of_seats = findViewById(R.id.number_of_seatsET);
+            TextInputEditText number_of_seats = findViewById(R.id.number_of_seatsET);
             String number = number_of_seats.getText().toString();
             elective.setSubjectArrayList(arrayList);
             elective.setNumberOfSeats(number);

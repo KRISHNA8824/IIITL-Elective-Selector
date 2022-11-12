@@ -33,53 +33,62 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/_10sdp">
 
     </LinearLayout>
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_item"
-        android:layout_gravity="center"
         android:layout_toRightOf="@+id/elective_row_LinearLayout"
         >
-        <EditText
-            android:id="@+id/number_of_seatsET"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:inputType="number"
-            android:hint="Number of Seats"
-            android:textSize="@dimen/_10sdp"
-            ></EditText>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:hint="Number of Seats">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/number_of_seatsET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:digits="0123456789."
+                android:inputType="numberDecimal"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center">
 
         <Button
             android:layout_below="@+id/toolbar"
             android:id="@+id/add_button"
             android:background="@drawable/round_primary"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="Add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add a sbuject"
             android:layout_marginTop="10dp"
             android:textColor="@color/white"
             android:paddingRight="10dp"
             android:layout_centerHorizontal="true"
-            android:drawableRight="@drawable/ic_add"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
             ></Button>
 
         <Button
             android:id="@+id/finish_button"
             android:layout_below="@+id/toolbar"
-            android:layout_width="@dimen/_200sdp"
-            android:layout_height="@dimen/_30sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
             android:background="@drawable/round_primary"
             android:text="Finish"
             android:textColor="@color/white"
@@ -87,5 +96,4 @@
 
             android:layout_toRightOf="@+id/add_button"
             ></Button>
-    </LinearLayout>
 </LinearLayout>

@@ -43,9 +43,6 @@ public class ElectiveAdapter extends RecyclerView.Adapter<ElectiveAdapter.Electi
                 Intent intent = new Intent(context, AdminSubjectList.class);
 
                 intent.putExtra("elective",elective);
-//                if(elective==null) {
-//                    Toast.makeText(context, "IS NULL", Toast.LENGTH_SHORT).show();
-//                }
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }

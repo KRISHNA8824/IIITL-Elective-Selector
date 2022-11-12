@@ -3,38 +3,62 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="5dp"
-    android:paddingBottom="5dp">
+    android:weightSum="5"
+    >
 
-    <EditText
-        android:id="@+id/subject_nameET"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="5dp"
-        android:background="@drawable/round_grey"
-        android:hint="Subjects Name"
-        android:textSize="14sp"
-        android:textColor="@color/black"
-        android:layout_width="@dimen/_160sdp"
-        android:layout_height="40dp"></EditText>
 
-    <EditText
-        android:id="@+id/faculty_nameET"
-        android:layout_width="@dimen/_80sdp"
-        android:layout_height="match_parent"
-        android:background="@drawable/round_grey"
-        android:textSize="@dimen/_10sdp"
-        android:gravity="center"
-        android:hint="Faculty Name"
-        ></EditText>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="@dimen/_130sdp"
+        android:layout_weight="2"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:hint="Subject Name">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/subject_nameET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="@dimen/_130sdp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginLeft="@dimen/_5sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:hint="Faculty Name">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/faculty_nameET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <ImageView
+        android:layout_weight="1"
         android:id="@+id/image_remove"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_30sdp"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="5dp"
-        android:layout_gravity="center_vertical"
-        android:src="@drawable/ic_close"
-        ></ImageView>
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:layout_gravity="center"
+        android:src="@drawable/cross_icon"
+        />
 
 </LinearLayout>
