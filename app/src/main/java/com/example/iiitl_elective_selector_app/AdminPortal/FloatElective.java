@@ -42,18 +42,18 @@ public class FloatElective extends AppCompatActivity {
     int count_elective;
     ImageView backPressButton;
     ProgressDialog progressDialog;
+
     @SuppressLint({"MissingInflatedId", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_float_elective);
-
 
         progressDialog = new ProgressDialog(FloatElective.this);
         progressDialog.setMessage("Please wait...");
         progressDialog.setCancelable(false);
         progressDialog.show();
 
+        setContentView(R.layout.activity_float_elective);
         Intent intent = getIntent();
         program = intent.getStringExtra("program");
         year = intent.getStringExtra("year");
@@ -79,6 +79,19 @@ public class FloatElective extends AppCompatActivity {
                 finish();
             }
         });
+//        add_elective_button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+////
+//////                Toast.makeText(FloatElective.this, program + " " + year + " " + branch, Toast.LENGTH_SHORT).show();
+////               Intent new_intent = new Intent(getApplicationContext(),AddSubjects.class);
+////                new_intent.putExtra("program", program);
+////                new_intent.putExtra("year", year);
+////                new_intent.putExtra("branch", branch);
+////                startActivity(new_intent);
+//            }
+//        });
 
         RecyclerView recyclerView = findViewById(R.id.elective_recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -112,5 +125,9 @@ public class FloatElective extends AppCompatActivity {
         });
 
     }
+//    @Override
+//    public void onBackPressed() {
+//        startActivity(new Intent(this, AdminPortal.class));
+//    }
 
 }
