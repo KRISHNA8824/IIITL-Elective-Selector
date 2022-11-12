@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +38,7 @@ public class FloatElective extends AppCompatActivity {
     FirebaseStorage firebaseStorage;
     String program,year,branch;
     int count_elective;
+    ImageView backPressButton;
     @SuppressLint({"MissingInflatedId", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,14 @@ public class FloatElective extends AppCompatActivity {
                 new_intent.putExtra("year", year);
                 new_intent.putExtra("branch", branch);
                 startActivity(new_intent);
+            }
+        });
+
+        backPressButton = findViewById(R.id.back_press);
+        backPressButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
 //        add_elective_button.setOnClickListener(new View.OnClickListener() {

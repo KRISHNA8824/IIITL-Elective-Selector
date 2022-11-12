@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.iiitl_elective_selector_app.R;
@@ -33,5 +35,14 @@ public class AdminSubjectList extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         SubjectAdapter electiveAdapter = new SubjectAdapter(getApplicationContext(),subjectArrayList, facultyArrayList);
         recyclerView.setAdapter(electiveAdapter);
+
+
+        ImageView backPressButton = findViewById(R.id.back_press);
+        backPressButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 }
