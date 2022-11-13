@@ -1,7 +1,6 @@
 package com.example.iiitl_elective_selector_app.AdminPortal;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +14,12 @@ import com.example.iiitl_elective_selector_app.R;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectView>{
+public class AdminSubjectAdapter extends RecyclerView.Adapter<AdminSubjectAdapter.SubjectView>{
     ArrayList<String> subjectArrayList = new ArrayList<>();
     ArrayList<String> facultyArrayList = new ArrayList<>();
     Context context;
 
-    public SubjectAdapter(Context applicationContext, ArrayList<String> subjectArrayList, ArrayList<String>facultyArrayList) {
+    public AdminSubjectAdapter(Context applicationContext, ArrayList<String> subjectArrayList, ArrayList<String>facultyArrayList) {
         this.subjectArrayList = subjectArrayList;
         this.facultyArrayList = facultyArrayList;
         this.context = applicationContext;
@@ -28,14 +27,14 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
 
     @NonNull
     @Override
-    public SubjectAdapter.SubjectView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AdminSubjectAdapter.SubjectView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context.getApplicationContext()).inflate(R.layout.row_subject,parent, false);
         return new SubjectView(view);
 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SubjectAdapter.SubjectView holder, int position) {
+    public void onBindViewHolder(@NonNull AdminSubjectAdapter.SubjectView holder, int position) {
         holder.subjectName.setText(subjectArrayList.get(position));
         holder.facultyName.setText(facultyArrayList.get(position));
     }

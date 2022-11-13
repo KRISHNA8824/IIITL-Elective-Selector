@@ -80,12 +80,12 @@ public class StudentPortal extends AppCompatActivity {
             }
         });
 
-        /*
-        RecyclerView recyclerView = findViewById(R.id.elective_list);
+
+        RecyclerView recyclerView = findViewById(R.id.elective_recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
-        ElectiveAdapter electiveAdapter = new ElectiveAdapter(getApplicationContext(),electiveArrayList);
+        StudentElectiveListAdapter electiveAdapter = new StudentElectiveListAdapter(getApplicationContext(), electiveArrayList);
         recyclerView.setAdapter(electiveAdapter);
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Registered Users").child(mAuth.getUid());
@@ -106,21 +106,29 @@ public class StudentPortal extends AppCompatActivity {
                             if(snapshot.hasChildren()){
                                 count_elective = 1;
                                 boolean flag = false;
+                                int cnt = 0;
                                 for(DataSnapshot dataSnapshot: snapshot.getChildren()){
                                     if(flag) {
+                                        cnt++;
                                         Elective elective = dataSnapshot.getValue(Elective.class);
                                         electiveArrayList.add(elective);
                                         count_elective++;
                                     }
                                     else flag = true;
                                 }
+
                                 electiveAdapter.notifyDataSetChanged();
                                 progressDialog.dismiss();
                             }
-                            else {
+                            progressDialog.dismiss();
+                           if(electiveArrayList.size() == 0){
                                 info_text1.setText("No Elective is floated.");
-                                progressDialog.dismiss();
                             }
+
+
+//                            if(electiveArrayList.size() == 0){
+//                                info_text1.setText("No Elective is floated.");
+//                            }
                         }
 
                         @Override
@@ -140,8 +148,6 @@ public class StudentPortal extends AppCompatActivity {
             }
         });
 
-
-         */
 
     }
 }

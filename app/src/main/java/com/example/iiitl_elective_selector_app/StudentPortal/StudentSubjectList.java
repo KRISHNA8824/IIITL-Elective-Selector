@@ -1,4 +1,4 @@
-package com.example.iiitl_elective_selector_app.AdminPortal;
+package com.example.iiitl_elective_selector_app.StudentPortal;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,18 +9,26 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.iiitl_elective_selector_app.AdminPortal.Elective;
 import com.example.iiitl_elective_selector_app.R;
 
 import java.util.ArrayList;
 
-public class AdminSubjectList extends AppCompatActivity {
+public class StudentSubjectList extends AppCompatActivity {
 
     ArrayList<String> subjectArrayList, facultyArrayList;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_subject_list);
+        setContentView(R.layout.activity_subject_list);
+
+        ImageView backPressButton = findViewById(R.id.back_press);
+        backPressButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         subjectArrayList = new ArrayList<>();
         facultyArrayList = new ArrayList<>();
@@ -32,16 +40,11 @@ public class AdminSubjectList extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.subject_recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        AdminSubjectAdapter electiveAdapter = new AdminSubjectAdapter(getApplicationContext(),subjectArrayList, facultyArrayList);
-        recyclerView.setAdapter(electiveAdapter);
+        StudentSubjectAdapter subjectAdapter = new StudentSubjectAdapter(getApplicationContext(),subjectArrayList, facultyArrayList);
+        recyclerView.setAdapter(subjectAdapter);
 
 
-        ImageView backPressButton = findViewById(R.id.back_press);
-        backPressButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+
+
     }
 }
