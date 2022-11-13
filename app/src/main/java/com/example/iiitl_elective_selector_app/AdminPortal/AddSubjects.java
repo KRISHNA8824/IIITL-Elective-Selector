@@ -86,7 +86,7 @@ public class AddSubjects extends AppCompatActivity implements View.OnClickListen
 
             case R.id.finish_button:
                 if(checkIfValidAndRead()){
-                    startActivity(new Intent(getApplicationContext(),FloatElective.class));
+                    startActivity(new Intent(getApplicationContext(),AdminPortal.class));
                     Toast.makeText(this,"Elective Added Successfully",Toast.LENGTH_SHORT).show();
                 }
                 break;
@@ -124,6 +124,7 @@ public class AddSubjects extends AppCompatActivity implements View.OnClickListen
             String number = number_of_seats.getText().toString();
             elective.setSubjectArrayList(arrayList);
             elective.setNumberOfSeats(number);
+            elective.setStatus("Not Floated");
             elective.setFacultyArrayList(facultyArrayList);
 
             FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -137,6 +138,7 @@ public class AddSubjects extends AppCompatActivity implements View.OnClickListen
             DatabaseReference reference = firebaseDatabase.getReference().child("Electives")
                     .child(new_program).child(year).child(branch);
             count_electives = 1;
+
 
             reference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -159,6 +161,11 @@ public class AddSubjects extends AppCompatActivity implements View.OnClickListen
 
                 }
             });
+
+
+//            for(int i=0;i<arrayList.size();i++) {
+//                Log.d("AddSubject", "checkIfValidAndRead: " + arrayList.get(i));
+//            }
 
         }
         return result;

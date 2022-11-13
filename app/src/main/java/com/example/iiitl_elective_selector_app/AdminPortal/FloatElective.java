@@ -48,6 +48,7 @@ public class FloatElective extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         progressDialog = new ProgressDialog(FloatElective.this);
         progressDialog.setMessage("Please wait...");
         progressDialog.setCancelable(false);
@@ -79,6 +80,7 @@ public class FloatElective extends AppCompatActivity {
                 finish();
             }
         });
+
 //        add_elective_button.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -96,6 +98,7 @@ public class FloatElective extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.elective_recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
         ElectiveAdapter electiveAdapter = new ElectiveAdapter(getApplicationContext(),electiveArrayList);
         recyclerView.setAdapter(electiveAdapter);
         String new_program = program.substring(0,1) + program.substring(2);

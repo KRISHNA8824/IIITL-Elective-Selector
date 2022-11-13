@@ -8,11 +8,21 @@ import java.util.ArrayList;
 public class Elective implements Serializable{
     public ArrayList<String> subjectArrayList;
     public String numberOfSeats;
+    public String status;
     public ArrayList<String> facultyArrayList;
     public Elective(){
         subjectArrayList = new ArrayList<>();
         facultyArrayList = new ArrayList<>();
     }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public ArrayList<String> getSubjectArrayList() {
         return subjectArrayList;
     }
