@@ -27,6 +27,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 
+import org.w3c.dom.Text;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,21 +42,23 @@ public class FloatElective extends AppCompatActivity {
     FirebaseStorage firebaseStorage;
     String program,year,branch;
     int count_elective;
-    ImageView backPressButton;
     ProgressDialog progressDialog;
+    TextView info_text;
 
     @SuppressLint({"MissingInflatedId", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_float_elective);
 
+        info_text = (TextView) findViewById(R.id.information_text);
 
         progressDialog = new ProgressDialog(FloatElective.this);
         progressDialog.setMessage("Please wait...");
         progressDialog.setCancelable(false);
         progressDialog.show();
 
-        setContentView(R.layout.activity_float_elective);
+
         Intent intent = getIntent();
         program = intent.getStringExtra("program");
         year = intent.getStringExtra("year");
@@ -73,7 +77,7 @@ public class FloatElective extends AppCompatActivity {
             }
         });
 
-        backPressButton = findViewById(R.id.back_press);
+        ImageView backPressButton = findViewById(R.id.back_press);
         backPressButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -110,13 +114,20 @@ public class FloatElective extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.hasChildren()){
                     count_elective = 1;
+                    boolean flag = false;
                     for(DataSnapshot dataSnapshot: snapshot.getChildren()){
-
-                        Elective elective = dataSnapshot.getValue(Elective.class);
-                        electiveArrayList.add(elective);
-                        count_elective++;
+                        if(flag) {
+                            Elective elective = dataSnapshot.getValue(Elective.class);
+                            electiveArrayList.add(elective);
+                            count_elective++;
+                        }
+                        else flag = true;
                     }
                     electiveAdapter.notifyDataSetChanged();
+                    progressDialog.dismiss();
+                }
+                else {
+                    info_text.setText("No elective is added.");
                     progressDialog.dismiss();
                 }
             }

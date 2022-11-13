@@ -6,14 +6,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.iiitl_elective_selector_app.AdminPortal.Elective;
+import com.example.iiitl_elective_selector_app.AdminPortal.ElectiveAdapter;
+import com.example.iiitl_elective_selector_app.AdminPortal.FloatElective;
 import com.example.iiitl_elective_selector_app.MainActivity;
 import com.example.iiitl_elective_selector_app.R;
+import com.example.iiitl_elective_selector_app.Users;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -23,6 +29,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.auth.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,11 +38,30 @@ public class StudentPortal extends AppCompatActivity {
 
     ImageView logout;
     FirebaseAuth mAuth;
+    ProgressDialog progressDialog;
+    String program,year,branch;
+    ArrayList<Elective> electiveArrayList = new ArrayList<>();
+    int count_elective;
+    TextView info_text1;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_portal);
+
+        info_text1 = findViewById(R.id.info_text1);
+        progressDialog = new ProgressDialog(StudentPortal.this);
+        progressDialog.setMessage("Please wait...");
+        progressDialog.setCancelable(false);
+//        progressDialog.show();
+
+        ImageView backPressButton = findViewById(R.id.back_press);
+        backPressButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         logout = findViewById(R.id.logoutIV);
         mAuth = FirebaseAuth.getInstance();
@@ -54,45 +80,65 @@ public class StudentPortal extends AppCompatActivity {
             }
         });
 
-        /*
-
-        final RecyclerView recyclerView = findViewById(R.id.elective_list);
-        DatabaseReference database = FirebaseDatabase.getInstance().getReference("Books");
+        RecyclerView recyclerView = findViewById(R.id.elective_list);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        HashMap<String, ArrayList<Book>> book_map = new HashMap<String, ArrayList<Book>>();
-        ArrayList<Book> list = new ArrayList<>();
-        BookAdapter adapter = new BookAdapter(getApplicationContext(),list,book_map);
-        recyclerView.setAdapter(adapter);
-        database.addValueEventListener(new ValueEventListener() {
-            @SuppressLint("NotifyDataSetChanged")
+
+        ElectiveAdapter electiveAdapter = new ElectiveAdapter(getApplicationContext(),electiveArrayList);
+        recyclerView.setAdapter(electiveAdapter);
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Registered Users").child(mAuth.getUid());
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.hasChildren()){
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                        Book book = dataSnapshot.getValue(Book.class);
-                        assert book != null;
-                        String s = book.getCategory();
-                        ArrayList<Book> temp = new ArrayList<>();
-                        if(book_map.containsKey(s)){
-                            temp = book_map.get(s);
-                            temp.add(book);
-                            book_map.put(s,temp);
-                        }else {
-                            temp.add(book);
-                            list.add(book);
-                            book_map.put(s, temp);
-                            temp=null;
+                if(snapshot.exists()) {
+                    Users user = snapshot.getValue(Users.class);
+                    program = user.getProgram();
+                    year = user.getYear();
+                    branch = user.getBranch();
+                    String new_program = program.substring(0,1) + program.substring(2);
+                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Electives").child(new_program).child(year).child(branch);
+
+                    reference.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if(snapshot.hasChildren()){
+                                count_elective = 1;
+                                boolean flag = false;
+                                for(DataSnapshot dataSnapshot: snapshot.getChildren()){
+                                    if(flag) {
+                                        Elective elective = dataSnapshot.getValue(Elective.class);
+                                        electiveArrayList.add(elective);
+                                        count_elective++;
+                                    }
+                                    else flag = true;
+                                }
+                                electiveAdapter.notifyDataSetChanged();
+                                progressDialog.dismiss();
+                            }
+                            else {
+                                info_text1.setText("No Elective is floated.");
+                                progressDialog.dismiss();
+                            }
                         }
-                    }
-                    adapter.notifyDataSetChanged();
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
+                else {
+                    info_text1.setText("No Elective is floated.");
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
 
-        */
+
     }
 }

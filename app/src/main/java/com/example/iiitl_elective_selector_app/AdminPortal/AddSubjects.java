@@ -140,18 +140,34 @@ public class AddSubjects extends AppCompatActivity implements View.OnClickListen
             count_electives = 1;
 
 
-            reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            reference.child("Count of ELectives").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if(snapshot.exists()) {
-//                        Toast.makeText(AddSubjects.this, "hihihi", Toast.LENGTH_SHORT).show();
-                        for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                            count_electives++;
+                        String temp = snapshot.toString();
+                        String temp1 = "";
+                        int i = temp.length()-1;
+                        while(temp.charAt(i) != '=') i--;
+                        i += 2;
+                        while(true) {
+                            if(temp.charAt(i)==' ') break;
+                            temp1 += temp.charAt(i++);
                         }
+                        count_electives = Integer.parseInt(temp1) + 1;
+
+                        reference.child("Count of ELectives").setValue(Integer.toString(count_electives));
                         reference.child("Elective" + count_electives).setValue(elective);
+//                        Toast.makeText(AddSubjects.this, "hihihi", Toast.LENGTH_SHORT).show();
+//                        for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+//                            count_electives++;
+//                        }
+//                        reference.child("Elective" + count_electives).setValue(elective);
                     }
                     else {
+
+                        reference.child("Count of ELectives").setValue(Integer.toString(count_electives));
                         reference.child("Elective" + count_electives).setValue(elective);
+//                        reference.child("Elective" + count_electives).setValue(elective);
 //                        Toast.makeText(AddSubjects.this, "kkk", Toast.LENGTH_SHORT).show();
                     }
                 }
