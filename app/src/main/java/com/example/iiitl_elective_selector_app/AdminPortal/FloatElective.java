@@ -70,6 +70,7 @@ public class FloatElective extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(FloatElective.this, program + " " + year + " " + branch, Toast.LENGTH_SHORT).show();
                 Intent new_intent = new Intent(getApplicationContext(),AddSubjects.class);
+
                 new_intent.putExtra("program", program);
                 new_intent.putExtra("year", year);
                 new_intent.putExtra("branch", branch);
@@ -129,6 +130,7 @@ public class FloatElective extends AppCompatActivity {
                     progressDialog.dismiss();
                 }
                 else {
+                    Toast.makeText(FloatElective.this, new_program + " " + year + " " + branch, Toast.LENGTH_SHORT).show();
                     info_text.setText("No elective is added.");
                     progressDialog.dismiss();
                 }

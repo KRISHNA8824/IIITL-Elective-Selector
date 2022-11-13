@@ -1,6 +1,7 @@
 package com.example.iiitl_elective_selector_app.AdminPortal;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -58,31 +59,77 @@ public class ElectiveAdapter extends RecyclerView.Adapter<ElectiveAdapter.Electi
                 context.startActivity(intent);
             }
         });
+
+
+
         holder.deleteElectiveTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AlertDialog.Builder(context)
-                        .setTitle("Delete!")
-                        .setMessage("Are you sure?")
-                        .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                String electiveID = map.get(position+1);
-                                DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Electives").child(program).child(year).child(branch);
-                                reference.child(electiveID).removeValue();
-                                Toast.makeText(context, "Elective is Successfully Removed", Toast.LENGTH_SHORT).show();
-                                HashMap<Integer,String> new_map = new HashMap<>();
-                                for (Integer pos : map.keySet()){
-                                    if(pos != position+1){
-                                        new_map.put(pos,map.get(pos));
-                                    }
-
-                                }
-                                map = new_map;
-
+//                new AlertDialog.Builder(context)
+//                        .setTitle("Delete!")
+//                        .setMessage("Are you sure?")
+//                        .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int which) {
+////                                String electiveID = map.get(position+1);
+////                                DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Electives").child(program).child(year).child(branch);
+////                                reference.child(electiveID).removeValue();
+////                                Toast.makeText(context, "Elective is Successfully Removed", Toast.LENGTH_SHORT).show();
+////                                HashMap<Integer,String> new_map = new HashMap<>();
+////                                for (Integer pos : map.keySet()){
+////                                    if(pos != position+1){
+////                                        new_map.put(pos,map.get(pos));
+////                                    }
+////
+////                                }
+////                                map = new_map;
+//
+//                            }
+//                        })
+//                        .setNegativeButton("Cancel", null)
+//                        .show();
+                        String electiveID = map.get(position+1);
+//                Toast.makeText(context, electiveID, Toast.LENGTH_SHORT).show();
+                        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Electives").child(program).child(year).child(branch);
+                        reference.child(electiveID).removeValue();
+                        Toast.makeText(context, "Elective is Successfully Removed", Toast.LENGTH_SHORT).show();
+                        HashMap<Integer,String> new_map = new HashMap<>();
+                        for (Integer pos : map.keySet()){
+                            if(pos != position+1){
+                                new_map.put(pos,map.get(pos));
                             }
-                        })
-                        .setNegativeButton("Cancel", null)
-                        .show();
+
+                        }
+                        map = new_map;
+
+                  Intent intent = new Intent(context, FloatElective.class);
+                  String program1 = program.substring(0,1) + "." + program.substring(1);
+                  intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                  intent.putExtra("program", program1);
+                  intent.putExtra("year", year);
+                  intent.putExtra("branch", branch);
+                  context.startActivity(intent);
+                  ((Activity)context).finish();
+
+            }
+        });
+
+        holder.floatElectiveTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String electiveID = map.get(position+1);
+//                Toast.makeText(context, electiveID, Toast.LENGTH_SHORT).show();
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Electives").child(program).child(year).child(branch);
+                reference.child(electiveID).child("status").setValue("Floated");
+                Toast.makeText(context, "Elective is Successfully Floated", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(context, FloatElective.class);
+                String program1 = program.substring(0,1) + "." + program.substring(1);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("program", program1);
+                intent.putExtra("year", year);
+                intent.putExtra("branch", branch);
+                context.startActivity(intent);
+                ((Activity)context).finish();
 
             }
         });

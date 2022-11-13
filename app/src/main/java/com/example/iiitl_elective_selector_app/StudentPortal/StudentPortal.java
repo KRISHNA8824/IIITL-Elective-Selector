@@ -80,6 +80,7 @@ public class StudentPortal extends AppCompatActivity {
             }
         });
 
+        /*
         RecyclerView recyclerView = findViewById(R.id.elective_list);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -139,6 +140,8 @@ public class StudentPortal extends AppCompatActivity {
             }
         });
 
+
+         */
 
     }
 }
