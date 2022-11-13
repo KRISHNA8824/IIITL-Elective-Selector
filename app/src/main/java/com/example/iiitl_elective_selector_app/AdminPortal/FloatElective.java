@@ -103,12 +103,13 @@ public class FloatElective extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
-        ElectiveAdapter electiveAdapter = new ElectiveAdapter(getApplicationContext(),electiveArrayList);
-        recyclerView.setAdapter(electiveAdapter);
+        HashMap<Integer, String> map = new HashMap<>();
         String new_program = program.substring(0,1) + program.substring(2);
+        ElectiveAdapter electiveAdapter = new ElectiveAdapter(getApplicationContext(),electiveArrayList, map, new_program, year, branch);
+        recyclerView.setAdapter(electiveAdapter);
+
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Electives").child(new_program).child(year).child(branch);
-
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -119,6 +120,7 @@ public class FloatElective extends AppCompatActivity {
                         if(flag) {
                             Elective elective = dataSnapshot.getValue(Elective.class);
                             electiveArrayList.add(elective);
+                            map.put(count_elective, dataSnapshot.getKey().toString());
                             count_elective++;
                         }
                         else flag = true;
