@@ -11,14 +11,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.iiitl_elective_selector_app.AdminPortal.Elective;
 import com.example.iiitl_elective_selector_app.AdminPortal.ElectiveAdapter;
-import com.example.iiitl_elective_selector_app.AdminPortal.FloatElective;
 import com.example.iiitl_elective_selector_app.MainActivity;
 import com.example.iiitl_elective_selector_app.R;
-import com.example.iiitl_elective_selector_app.Users;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -31,7 +28,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.auth.User;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class StudentPortal extends AppCompatActivity {
 
@@ -91,11 +87,12 @@ public class StudentPortal extends AppCompatActivity {
             }
         });
 
+        /*
         RecyclerView recyclerView = findViewById(R.id.elective_list);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
-        ElectiveAdapter electiveAdapter = new ElectiveAdapter(getApplicationContext(),electiveArrayList);
+        ElectiveAdapter electiveAdapter = new ElectiveAdapter(getApplicationContext(),electiveArrayList, map);
         recyclerView.setAdapter(electiveAdapter);
         String new_program = program.substring(0,1) + program.substring(2);
 
@@ -129,5 +126,6 @@ public class StudentPortal extends AppCompatActivity {
             }
         });
 
+         */
     }
 }
