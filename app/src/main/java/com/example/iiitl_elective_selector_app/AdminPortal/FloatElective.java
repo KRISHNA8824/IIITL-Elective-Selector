@@ -40,7 +40,6 @@ public class FloatElective extends AppCompatActivity {
     FirebaseStorage firebaseStorage;
     String program,year,branch;
     int count_elective;
-    ImageView backPressButton;
     ProgressDialog progressDialog;
 
     @SuppressLint({"MissingInflatedId", "SetTextI18n"})
@@ -73,7 +72,7 @@ public class FloatElective extends AppCompatActivity {
             }
         });
 
-        backPressButton = findViewById(R.id.back_press);
+        ImageView backPressButton = findViewById(R.id.back_press);
         backPressButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -110,13 +109,19 @@ public class FloatElective extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.hasChildren()){
                     count_elective = 1;
+                    boolean flag = false;
                     for(DataSnapshot dataSnapshot: snapshot.getChildren()){
-
-                        Elective elective = dataSnapshot.getValue(Elective.class);
-                        electiveArrayList.add(elective);
-                        count_elective++;
+                        if(flag) {
+                            Elective elective = dataSnapshot.getValue(Elective.class);
+                            electiveArrayList.add(elective);
+                            count_elective++;
+                        }
+                        else flag = true;
                     }
                     electiveAdapter.notifyDataSetChanged();
+                    progressDialog.dismiss();
+                }
+                else {
                     progressDialog.dismiss();
                 }
             }
