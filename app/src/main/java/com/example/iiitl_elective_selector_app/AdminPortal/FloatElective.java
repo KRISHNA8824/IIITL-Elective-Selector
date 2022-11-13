@@ -27,6 +27,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 
+import org.w3c.dom.Text;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,19 +43,22 @@ public class FloatElective extends AppCompatActivity {
     String program,year,branch;
     int count_elective;
     ProgressDialog progressDialog;
+    TextView info_text;
 
     @SuppressLint({"MissingInflatedId", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_float_elective);
 
+        info_text = (TextView) findViewById(R.id.information_text);
 
         progressDialog = new ProgressDialog(FloatElective.this);
         progressDialog.setMessage("Please wait...");
         progressDialog.setCancelable(false);
         progressDialog.show();
 
-        setContentView(R.layout.activity_float_elective);
+
         Intent intent = getIntent();
         program = intent.getStringExtra("program");
         year = intent.getStringExtra("year");
@@ -124,6 +129,7 @@ public class FloatElective extends AppCompatActivity {
                     progressDialog.dismiss();
                 }
                 else {
+                    info_text.setText("No elective is added.");
                     progressDialog.dismiss();
                 }
             }
