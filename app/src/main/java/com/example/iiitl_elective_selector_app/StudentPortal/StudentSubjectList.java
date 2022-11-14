@@ -20,7 +20,7 @@ public class StudentSubjectList extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_subject_list);
+        setContentView(R.layout.activity_student_subject_list);
 
         ImageView backPressButton = findViewById(R.id.back_press);
         backPressButton.setOnClickListener(new View.OnClickListener() {
