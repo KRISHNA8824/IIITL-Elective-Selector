@@ -8,6 +8,7 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
+
         android:id="@+id/linear_layout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,6 +40,14 @@
 
     </LinearLayout>
 
-
+    <TextView
+        android:layout_below="@+id/linear_layout1"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_20sdp"
+        android:textSize="@dimen/_12sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:text="subject Name"
+        android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"/>
 
 </RelativeLayout>

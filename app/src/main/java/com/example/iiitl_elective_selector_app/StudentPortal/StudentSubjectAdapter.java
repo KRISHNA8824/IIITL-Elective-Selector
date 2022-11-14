@@ -1,12 +1,16 @@
 package com.example.iiitl_elective_selector_app.StudentPortal;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.iiitl_elective_selector_app.R;
@@ -18,7 +22,7 @@ public class StudentSubjectAdapter  extends RecyclerView.Adapter<StudentSubjectA
     ArrayList<String> subjectArrayList = new ArrayList<>();
     ArrayList<String> facultyArrayList = new ArrayList<>();
     Context context;
-
+    boolean selected = false;
     public StudentSubjectAdapter(Context applicationContext, ArrayList<String> subjectArrayList, ArrayList<String>facultyArrayList) {
         this.subjectArrayList = subjectArrayList;
         this.facultyArrayList = facultyArrayList;
@@ -37,6 +41,27 @@ public class StudentSubjectAdapter  extends RecyclerView.Adapter<StudentSubjectA
     public void onBindViewHolder(@NonNull StudentSubjectAdapter.SubjectView holder, int position) {
         holder.subjectName.setText(subjectArrayList.get(position));
         holder.facultyName.setText(facultyArrayList.get(position));
+        selected = false;
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!selected){
+                    selected = true;
+                    String subject_name = holder.subjectName.getText().toString();
+                    Intent intent = new Intent("Subject Adapter");
+                    //            intent.putExtra("quantity",Integer.parseInt(quantity.getText().toString()));
+                    intent.putExtra("subject_name",subject_name);
+                    LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+
+                    holder.itemView.setBackgroundColor(Color.parseColor("#287323"));
+
+                }else{
+                    Toast.makeText(context, "Already selected", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
     }
 
     @Override

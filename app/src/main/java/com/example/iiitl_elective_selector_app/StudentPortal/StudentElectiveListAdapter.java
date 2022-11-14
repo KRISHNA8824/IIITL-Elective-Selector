@@ -2,6 +2,7 @@ package com.example.iiitl_elective_selector_app.StudentPortal;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -28,11 +29,22 @@ public class StudentElectiveListAdapter extends RecyclerView.Adapter<StudentElec
     ArrayList<Elective> electiveList = new ArrayList<>();
     Context context;
 
+//    String recieverSubject;
     public StudentElectiveListAdapter(Context applicationContext, ArrayList<Elective> electiveList) {
         this.electiveList = electiveList;
         this.context = applicationContext;
 
     }
+
+//    public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//            // Get extra data included in the Intent
+//            String ItemName = intent.getStringExtra("item");
+//            String qty = intent.getStringExtra("quantity");
+//            Toast.makeText(context,ItemName +" "+qty ,Toast.LENGTH_SHORT).show();
+//        }
+//    };
 
 
     @NonNull
