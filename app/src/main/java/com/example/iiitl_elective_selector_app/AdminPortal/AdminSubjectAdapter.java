@@ -1,27 +1,40 @@
 package com.example.iiitl_elective_selector_app.AdminPortal;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.iiitl_elective_selector_app.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class AdminSubjectAdapter extends RecyclerView.Adapter<AdminSubjectAdapter.SubjectView>{
     ArrayList<SubjectModel> subjectModelArrayList = new ArrayList<>();
+    DetailsModel detailsModel;
+    String electiveID;
     Context context;
 
-    public AdminSubjectAdapter(Context applicationContext, ArrayList<SubjectModel> subjectModelArrayList) {
+    public AdminSubjectAdapter(Context applicationContext, ArrayList<SubjectModel> subjectModelArrayList, DetailsModel detailsModel, String electiveID) {
         this.context = applicationContext;
         this.subjectModelArrayList = subjectModelArrayList;
+        this.detailsModel = detailsModel;
+        this.electiveID = electiveID;
     }
+
 
     @NonNull
     @Override
@@ -45,6 +58,32 @@ public class AdminSubjectAdapter extends RecyclerView.Adapter<AdminSubjectAdapte
         else {
             holder.status.setText("Unavailable");
         }
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String program = detailsModel.getNew_program();
+                String year = detailsModel.getYear();
+                String branch = detailsModel.getBranch();
+
+                //Toast.makeText(context, "hiiiii", Toast.LENGTH_SHORT).show();
+
+                //.child(electiveID).child(holder.subjectName.getText().toString())
+
+
+
+                Intent intent = new Intent(context, ShowUserList.class);
+
+//                DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child()
+//                Toast.makeText(context, detailsModel.new_program + " " + detailsModel.year + " " + detailsModel.branch, Toast.LENGTH_SHORT).show();
+                intent.putExtra("Details", detailsModel);
+                intent.putExtra("electiveID", electiveID);
+                intent.putExtra("subjectID", holder.subjectName.getText().toString());
+
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

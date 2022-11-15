@@ -51,7 +51,7 @@
             android:background="@drawable/round_primary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add a sbuject"
+            android:text="Add a subject"
             android:layout_marginTop="@dimen/_20sdp"
             android:textColor="@color/white"
             android:paddingRight="10dp"

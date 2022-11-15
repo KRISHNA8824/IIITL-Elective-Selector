@@ -56,7 +56,7 @@ public class ElectiveAdapter extends RecyclerView.Adapter<ElectiveAdapter.Electi
                 String electiveID = map.get(position+1);
 //                Toast.makeText(context, detailsModel.new_program + " " + detailsModel.year + " " + detailsModel.branch, Toast.LENGTH_SHORT).show();
                 intent.putExtra("Details", detailsModel);
-                intent.putExtra("Position", electiveID);
+                intent.putExtra("electiveID", electiveID);
                 intent.putExtra("elective",elective);
 
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

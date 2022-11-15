@@ -84,7 +84,6 @@ public class StudentPortal extends AppCompatActivity {
         });
 
 
-
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Registered Users").child(mAuth.getUid());
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

@@ -5,15 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Pair;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.iiitl_elective_selector_app.R;
+import com.example.iiitl_elective_selector_app.StudentModel;
+import com.example.iiitl_elective_selector_app.Users;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,52 +24,47 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class AdminSubjectList extends AppCompatActivity {
+public class ShowUserList extends AppCompatActivity {
 
-    ArrayList<String> subjectArrayList, facultyArrayList;
-    String electiveID;
+    String electiveID, subjectID;
+    ArrayList<StudentModel> studentArrayList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_subject_list);
+        setContentView(R.layout.activity_show_user_list);
 
-        subjectArrayList = new ArrayList<>();
-        facultyArrayList = new ArrayList<>();
         Intent intent = getIntent();
         DetailsModel detailsModel = (DetailsModel) intent.getSerializableExtra("Details");
         electiveID =  intent.getStringExtra("electiveID");
-        //Toast.makeText(this, intent.getStringExtra("elective"), Toast.LENGTH_SHORT).show();
-        Elective elective = (Elective) intent.getSerializableExtra("elective");
-        subjectArrayList = elective.getSubjectArrayList();
-        facultyArrayList = elective.getFacultyArrayList();
+        subjectID = intent.getStringExtra("subjectID");
 
-        RecyclerView recyclerView = findViewById(R.id.subject_recyclerView);
+        RecyclerView recyclerView = findViewById(R.id.student_recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        ArrayList<SubjectModel> subjectModelArrayList = new ArrayList<>();
-        AdminSubjectAdapter electiveAdapter = new AdminSubjectAdapter(getApplicationContext(), subjectModelArrayList, detailsModel, electiveID);
-        recyclerView.setAdapter(electiveAdapter);
+        studentArrayList = new ArrayList<>();
+        ShowUserListAdapter showUserListAdapter = new ShowUserListAdapter(getApplicationContext(), studentArrayList);
+        recyclerView.setAdapter(showUserListAdapter);
 
 
         String program = detailsModel.getNew_program();
         String year = detailsModel.getYear();
         String branch = detailsModel.getBranch();
 
-//        Toast.makeText(AdminSubjectList.this, program + " " + year + " " + branch + " " + electiveID, Toast.LENGTH_SHORT).show();
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Electives").child(program).child(year).child(branch);
-        reference.child(electiveID).child("Subjects").addValueEventListener(new ValueEventListener() {
-            @SuppressLint("NotifyDataSetChanged")
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Admin").child(program).child(year).child(branch).child(electiveID).child(subjectID);
+        reference.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                if(snapshot.hasChildren()){
-//                    Toast.makeText(AdminSubjectList.this, "Exits", Toast.LENGTH_SHORT).show();
-                    subjectModelArrayList.clear();
-                    for(DataSnapshot dataSnapshot :  snapshot.getChildren()){
-                        SubjectModel subject = dataSnapshot.getValue(SubjectModel.class);
-                        subjectModelArrayList.add(subject);
+                if(snapshot.hasChildren()) {
+                    for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+//                        Toast.makeText(ShowUserList.this, dataSnapshot.getKey(), Toast.LENGTH_SHORT).show();
+                        StudentModel studentModel = dataSnapshot.getValue(StudentModel.class);
+                        studentArrayList.add(studentModel);
+//                        Toast.makeText(ShowUserList.this, studentModel.getStudentName(), Toast.LENGTH_SHORT).show();
                     }
-                    electiveAdapter.notifyDataSetChanged();
+                    //Toast.makeText(ShowUserList.this, "" + studentArrayList.size(), Toast.LENGTH_SHORT).show();
+                    showUserListAdapter.notifyDataSetChanged();
                 }
             }
 
