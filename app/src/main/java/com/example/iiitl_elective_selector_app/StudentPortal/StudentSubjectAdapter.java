@@ -13,20 +13,21 @@ import androidx.annotation.NonNull;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.iiitl_elective_selector_app.AdminPortal.SubjectModel;
 import com.example.iiitl_elective_selector_app.R;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class StudentSubjectAdapter  extends RecyclerView.Adapter<StudentSubjectAdapter.SubjectView>{
-    ArrayList<String> subjectArrayList = new ArrayList<>();
-    ArrayList<String> facultyArrayList = new ArrayList<>();
+    ArrayList<SubjectModel> subjectModelArrayList = new ArrayList<>();
     Context context;
+    public static String message = "";
+    String subName;
     boolean selected = false;
-    public StudentSubjectAdapter(Context applicationContext, ArrayList<String> subjectArrayList, ArrayList<String>facultyArrayList) {
-        this.subjectArrayList = subjectArrayList;
-        this.facultyArrayList = facultyArrayList;
+    public StudentSubjectAdapter(Context applicationContext, ArrayList<SubjectModel> subjectModelArrayList) {
         this.context = applicationContext;
+        this.subjectModelArrayList = subjectModelArrayList;
     }
 
     @NonNull
@@ -39,13 +40,25 @@ public class StudentSubjectAdapter  extends RecyclerView.Adapter<StudentSubjectA
 
     @Override
     public void onBindViewHolder(@NonNull StudentSubjectAdapter.SubjectView holder, int position) {
-        holder.subjectName.setText(subjectArrayList.get(position));
-        holder.facultyName.setText(facultyArrayList.get(position));
+        SubjectModel subject = subjectModelArrayList.get(position);
+//        holder.subjectName.setText(subjectArrayList.get(position));
+//        holder.facultyName.setText(facultyArrayList.get(position));
+        subName = subject.getSubjectName();
+        holder.subjectName.setText(subject.getSubjectName());
+        holder.facultyName.setText(subject.getFacultyName());
+        int count = Integer.parseInt(subject.getCountofSeat());
+        if(count > 0) {
+            holder.status.setText("Available : " + count + " seats");
+        }
+        else {
+            holder.status.setText("Unavailable");
+        }
         selected = false;
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(!selected){
+                    message = holder.subjectName.getText().toString();
                     selected = true;
                     String subject_name = holder.subjectName.getText().toString();
                     Intent intent = new Intent("Subject Adapter");
@@ -54,7 +67,6 @@ public class StudentSubjectAdapter  extends RecyclerView.Adapter<StudentSubjectA
                     LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
 
                     holder.itemView.setBackgroundColor(Color.parseColor("#287323"));
-
                 }else{
                     Toast.makeText(context, "Already selected", Toast.LENGTH_SHORT).show();
                 }
@@ -66,14 +78,16 @@ public class StudentSubjectAdapter  extends RecyclerView.Adapter<StudentSubjectA
 
     @Override
     public int getItemCount() {
-        return subjectArrayList.size();
+        return subjectModelArrayList.size();
     }
     public class SubjectView extends RecyclerView.ViewHolder {
-        TextView subjectName, facultyName;
+        TextView subjectName, facultyName, status;
+
         public SubjectView(@NonNull View itemView) {
             super(itemView);
             subjectName = Objects.requireNonNull(itemView).findViewById(R.id.subject_name);
             facultyName = itemView.findViewById(R.id.faculty_name);
+            status = itemView.findViewById(R.id.number_of_seats);
         }
     }
 }

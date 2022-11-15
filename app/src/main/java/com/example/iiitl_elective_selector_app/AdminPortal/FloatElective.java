@@ -29,6 +29,7 @@ import com.google.firebase.storage.FirebaseStorage;
 
 import org.w3c.dom.Text;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,6 +45,7 @@ public class FloatElective extends AppCompatActivity {
     int count_elective;
     ProgressDialog progressDialog;
     TextView info_text;
+    DetailsModel detailsModel;
 
     @SuppressLint({"MissingInflatedId", "SetTextI18n"})
     @Override
@@ -60,9 +62,10 @@ public class FloatElective extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        program = intent.getStringExtra("program");
-        year = intent.getStringExtra("year");
-        branch = intent.getStringExtra("branch");
+        detailsModel = (DetailsModel) intent.getSerializableExtra("Details");
+        program = detailsModel.getProgram();
+        year = detailsModel.getYear();
+        branch = detailsModel.getBranch();
 
         FloatingActionButton fab = findViewById(R.id.addElective);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -71,9 +74,10 @@ public class FloatElective extends AppCompatActivity {
                 Toast.makeText(FloatElective.this, program + " " + year + " " + branch, Toast.LENGTH_SHORT).show();
                 Intent new_intent = new Intent(getApplicationContext(),AddSubjects.class);
 
-                new_intent.putExtra("program", program);
-                new_intent.putExtra("year", year);
-                new_intent.putExtra("branch", branch);
+                new_intent.putExtra("Details", detailsModel);
+//                new_intent.putExtra("program", program);
+//                new_intent.putExtra("year", year);
+//                new_intent.putExtra("branch", branch);
                 startActivity(new_intent);
             }
         });
@@ -106,7 +110,7 @@ public class FloatElective extends AppCompatActivity {
 
         HashMap<Integer, String> map = new HashMap<>();
         String new_program = program.substring(0,1) + program.substring(2);
-        ElectiveAdapter electiveAdapter = new ElectiveAdapter(getApplicationContext(),electiveArrayList, map, new_program, year, branch);
+        ElectiveAdapter electiveAdapter = new ElectiveAdapter(getApplicationContext(), electiveArrayList, map, detailsModel);
         recyclerView.setAdapter(electiveAdapter);
 
 

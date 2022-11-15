@@ -137,9 +137,12 @@ public class AdminPortal extends AppCompatActivity {
                 }
                 else {
                     Intent intent = new Intent(getApplicationContext(), FloatElective.class);
-                    intent.putExtra("program", program);
-                    intent.putExtra("year", year);
-                    intent.putExtra("branch", branch);
+                    String new_program = program.substring(0,1) + program.substring(2);
+                    DetailsModel detailsModel = new DetailsModel(program, year, branch, new_program);
+                    intent.putExtra("Details", detailsModel);
+//                    intent.putExtra("program", program);
+//                    intent.putExtra("year", year);
+//                    intent.putExtra("branch", branch);
                     startActivity(intent);
                 }
 

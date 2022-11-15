@@ -24,15 +24,14 @@ import java.util.HashMap;
 public class ElectiveAdapter extends RecyclerView.Adapter<ElectiveAdapter.ElectiveView>{
     ArrayList<Elective> electiveList = new ArrayList<>();
     Context context;
-    String program,year,branch;
+//    String program,year,branch;
+    DetailsModel detailsModel;
     HashMap<Integer, String> map = new HashMap<>();
-    public ElectiveAdapter(Context applicationContext, ArrayList<Elective> electiveList, HashMap<Integer, String> map, String new_program, String year, String branch) {
+    public ElectiveAdapter(Context applicationContext, ArrayList<Elective> electiveList, HashMap<Integer, String> map, DetailsModel detailsModel) {
         this.electiveList = electiveList;
         this.context = applicationContext;
         this.map = map;
-        this.program = new_program;
-        this.year = year;
-        this.branch = branch;
+        this.detailsModel = detailsModel;
     }
 
 
@@ -53,6 +52,11 @@ public class ElectiveAdapter extends RecyclerView.Adapter<ElectiveAdapter.Electi
             public void onClick(View view) {
                 Intent intent = new Intent(context, AdminSubjectList.class);
 
+//                DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child()
+                String electiveID = map.get(position+1);
+//                Toast.makeText(context, detailsModel.new_program + " " + detailsModel.year + " " + detailsModel.branch, Toast.LENGTH_SHORT).show();
+                intent.putExtra("Details", detailsModel);
+                intent.putExtra("Position", electiveID);
                 intent.putExtra("elective",elective);
 
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -88,7 +92,10 @@ public class ElectiveAdapter extends RecyclerView.Adapter<ElectiveAdapter.Electi
 //                        .setNegativeButton("Cancel", null)
 //                        .show();
                         String electiveID = map.get(position+1);
-//                Toast.makeText(context, electiveID, Toast.LENGTH_SHORT).show();
+//                      Toast.makeText(context, electiveID, Toast.LENGTH_SHORT).show();
+                        String program = detailsModel.getNew_program();
+                        String year = detailsModel.getYear();
+                        String branch = detailsModel.getBranch();
                         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Electives").child(program).child(year).child(branch);
                         reference.child(electiveID).removeValue();
                         Toast.makeText(context, "Elective is Successfully Removed", Toast.LENGTH_SHORT).show();
@@ -97,18 +104,15 @@ public class ElectiveAdapter extends RecyclerView.Adapter<ElectiveAdapter.Electi
                             if(pos != position+1){
                                 new_map.put(pos,map.get(pos));
                             }
-
                         }
                         map = new_map;
 
                   Intent intent = new Intent(context, FloatElective.class);
-                  String program1 = program.substring(0,1) + "." + program.substring(1);
                   intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                  intent.putExtra("program", program1);
-                  intent.putExtra("year", year);
-                  intent.putExtra("branch", branch);
+                  intent.putExtra("Details", detailsModel);
                   context.startActivity(intent);
-                  ((Activity)context).finish();
+                  Context new_context = context;
+                  ((Activity)new_context).finish();
 
             }
         });
@@ -118,18 +122,19 @@ public class ElectiveAdapter extends RecyclerView.Adapter<ElectiveAdapter.Electi
             public void onClick(View view) {
                 String electiveID = map.get(position+1);
 //                Toast.makeText(context, electiveID, Toast.LENGTH_SHORT).show();
+                String program = detailsModel.getNew_program();
+                String year = detailsModel.getYear();
+                String branch = detailsModel.getBranch();
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Electives").child(program).child(year).child(branch);
                 reference.child(electiveID).child("status").setValue("Floated");
                 Toast.makeText(context, "Elective is Successfully Floated", Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(context, FloatElective.class);
-                String program1 = program.substring(0,1) + "." + program.substring(1);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("program", program1);
-                intent.putExtra("year", year);
-                intent.putExtra("branch", branch);
+                intent.putExtra("Details", detailsModel);
                 context.startActivity(intent);
-                ((Activity)context).finish();
+                Context new_context = context;
+                ((Activity)new_context).finish();
 
             }
         });

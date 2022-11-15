@@ -2,7 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_marginBottom="@dimen/_5sdp"
+    android:layout_marginBottom="@dimen/_10sdp"
     android:layout_marginLeft="@dimen/_10sdp"
     android:layout_marginRight="@dimen/_10sdp"
     android:layout_height="wrap_content"
@@ -68,15 +68,10 @@
                     android:layout_marginRight="@dimen/_5sdp">
 
                     <TextView
+                        android:id="@+id/number_of_seats"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Available : "
-                        android:textColor="@color/white"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="20 seats"
+                        android:text="Available : 20 seats"
                         android:textColor="@color/white"/>
 
                 </LinearLayout>

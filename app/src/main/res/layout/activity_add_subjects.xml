@@ -34,32 +34,6 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_below="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:layout_marginRight="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:hint="Number of Seats">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/number_of_seatsET"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:digits="0123456789."
-                android:inputType="numberDecimal"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/layout_list"
@@ -78,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Add a sbuject"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:textColor="@color/white"
             android:paddingRight="10dp"
             android:layout_centerHorizontal="true"

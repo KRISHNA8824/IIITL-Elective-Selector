@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.iiitl_elective_selector_app.AdminPortal.DetailsModel;
 import com.example.iiitl_elective_selector_app.AdminPortal.Elective;
 import com.example.iiitl_elective_selector_app.AdminPortal.ElectiveAdapter;
 import com.example.iiitl_elective_selector_app.AdminPortal.FloatElective;
@@ -43,6 +44,8 @@ public class StudentPortal extends AppCompatActivity {
     ArrayList<Elective> electiveArrayList = new ArrayList<>();
     int count_elective;
     TextView info_text1;
+    String new_program;
+    DetailsModel detailsModel;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,12 +84,6 @@ public class StudentPortal extends AppCompatActivity {
         });
 
 
-        RecyclerView recyclerView = findViewById(R.id.elective_recyclerView);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-
-        StudentElectiveListAdapter electiveAdapter = new StudentElectiveListAdapter(getApplicationContext(), electiveArrayList);
-        recyclerView.setAdapter(electiveAdapter);
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Registered Users").child(mAuth.getUid());
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -97,7 +94,17 @@ public class StudentPortal extends AppCompatActivity {
                     program = user.getProgram();
                     year = user.getYear();
                     branch = user.getBranch();
-                    String new_program = program.substring(0,1) + program.substring(2);
+                    new_program = program.substring(0,1) + program.substring(2);
+                    detailsModel = new DetailsModel(program, year, branch, new_program);
+
+                    HashMap<Integer, String> map = new HashMap<>();
+                    RecyclerView recyclerView = findViewById(R.id.elective_recyclerView);
+                    recyclerView.setHasFixedSize(true);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+                    StudentElectiveListAdapter electiveAdapter = new StudentElectiveListAdapter(getApplicationContext(), electiveArrayList,  map, detailsModel);
+                    recyclerView.setAdapter(electiveAdapter);
+
                     DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Electives").child(new_program).child(year).child(branch);
 
                     reference.addValueEventListener(new ValueEventListener() {
@@ -112,6 +119,7 @@ public class StudentPortal extends AppCompatActivity {
                                         cnt++;
                                         Elective elective = dataSnapshot.getValue(Elective.class);
                                         electiveArrayList.add(elective);
+                                        map.put(count_elective, dataSnapshot.getKey().toString());
                                         count_elective++;
                                     }
                                     else flag = true;

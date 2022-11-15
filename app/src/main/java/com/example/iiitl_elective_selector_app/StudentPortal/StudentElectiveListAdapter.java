@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.iiitl_elective_selector_app.AdminPortal.AdminSubjectList;
+import com.example.iiitl_elective_selector_app.AdminPortal.DetailsModel;
 import com.example.iiitl_elective_selector_app.AdminPortal.Elective;
 import com.example.iiitl_elective_selector_app.AdminPortal.ElectiveAdapter;
 import com.example.iiitl_elective_selector_app.AdminPortal.FloatElective;
@@ -28,11 +29,14 @@ import java.util.HashMap;
 public class StudentElectiveListAdapter extends RecyclerView.Adapter<StudentElectiveListAdapter.ElectiveView>{
     ArrayList<Elective> electiveList = new ArrayList<>();
     Context context;
-
+    DetailsModel detailsModel;
+    HashMap<Integer, String> map = new HashMap<>();
 //    String recieverSubject;
-    public StudentElectiveListAdapter(Context applicationContext, ArrayList<Elective> electiveList) {
+    public StudentElectiveListAdapter(Context applicationContext, ArrayList<Elective> electiveList,  HashMap<Integer, String> map, DetailsModel detailsModel) {
         this.electiveList = electiveList;
         this.context = applicationContext;
+        this.detailsModel = detailsModel;
+        this.map = map;
 
     }
 
@@ -59,14 +63,17 @@ public class StudentElectiveListAdapter extends RecyclerView.Adapter<StudentElec
     public void onBindViewHolder(@NonNull StudentElectiveListAdapter.ElectiveView holder, @SuppressLint("RecyclerView") int position) {
 
         holder.electiveNumber.setText("Elective "+ String.valueOf(position+1));
-        Elective elective = electiveList.get(position);
         holder.electiveNumber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, StudentSubjectList.class);
 
-                intent.putExtra("elective",elective);
 
+                String electiveID = map.get(position+1);
+                intent.putExtra("Details", detailsModel);
+                intent.putExtra("Position", electiveID);
+//                Toast.makeText(context, detailsModel.getProgram() + " " + detailsModel.getYear() + " " + detailsModel.getBranch() + " " + detailsModel.getNew_program(), Toast.LENGTH_SHORT).show();
+//
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }

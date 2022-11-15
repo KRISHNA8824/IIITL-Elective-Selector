@@ -47,6 +47,7 @@ public class AddSubjects extends AppCompatActivity implements View.OnClickListen
     ImageView removeImage, backPressButton;
     Intent intent;
     int count_electives = 0;
+    DetailsModel detailsModel;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -96,16 +97,26 @@ public class AddSubjects extends AppCompatActivity implements View.OnClickListen
 
     private boolean checkIfValidAndRead() {
         boolean result = true;
+        ArrayList<String> seatCountArrayList = new ArrayList<>();
         ArrayList<String> arrayList = new ArrayList<>();
         ArrayList<String> facultyArrayList = new ArrayList<>();
+
+        ArrayList<SubjectModel> subjectModelArrayList = new ArrayList<>();
+
         for(int i=0;i<layoutList.getChildCount();i++) {
 
             View subjectView = layoutList.getChildAt(i);
             TextInputEditText subject_name = subjectView.findViewById(R.id.subject_nameET);
             TextInputEditText facultyName = subjectView.findViewById(R.id.faculty_nameET);
-            if (!subject_name.getText().toString().equals("") && !facultyName.getText().toString().equals("") ){
+            TextInputEditText number_of_seats = subjectView.findViewById(R.id.number_of_seatsET);
+
+            if (!subject_name.getText().toString().equals("") && !facultyName.getText().toString().equals("") && !number_of_seats.getText().toString().equals("")){
+
+                SubjectModel subjectModel = new SubjectModel(subject_name.getText().toString(), facultyName.getText().toString(), number_of_seats.getText().toString());
+                subjectModelArrayList.add(subjectModel);
                 arrayList.add(subject_name.getText().toString());
                 facultyArrayList.add(facultyName.getText().toString());
+                seatCountArrayList.add(number_of_seats.getText().toString());
             }else{
                 result = false;
                 break;
@@ -119,22 +130,61 @@ public class AddSubjects extends AppCompatActivity implements View.OnClickListen
             Toast.makeText(this,"Fill all details correctly",Toast.LENGTH_SHORT).show();
         }
         if(result == true && arrayList.size() != 0){
+            detailsModel = (DetailsModel) intent.getSerializableExtra("Details");
+            String program = detailsModel.getProgram();
+            String year = detailsModel.getYear();
+            String branch = detailsModel.getBranch();
+            String new_program = detailsModel.getNew_program();
+
+            count_electives = 1;
+            DatabaseReference reff = FirebaseDatabase.getInstance().getReference().child("Electives").child(new_program).child(year).child(branch);
+            reff.child("Count of ELectives").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.exists()) {
+//                        Toast.makeText(AddSubjects.this, "Exits", Toast.LENGTH_SHORT).show();
+                        String temp = snapshot.toString();
+                        String temp1 = "";
+                        int i = temp.length()-1;
+                        while(temp.charAt(i) != '=') i--;
+                        i += 2;
+                        while(true) {
+                            if(temp.charAt(i)==' ') break;
+                            temp1 += temp.charAt(i++);
+                        }
+                        count_electives = Integer.parseInt(temp1) + 1;
+                        reff.child("Count of ELectives").setValue(Integer.toString(count_electives));
+                        for(SubjectModel subjectModel : subjectModelArrayList) {
+                            reff.child("Elective" + count_electives).child("Subjects").child(subjectModel.getSubjectName()).setValue(subjectModel);
+                        }
+                        reff.child("Elective" + count_electives).child("status").setValue("Not Floated");
+                    }
+                    else {
+                        reff.child("Count of ELectives").setValue(Integer.toString(count_electives));
+                        for(SubjectModel subjectModel : subjectModelArrayList) {
+                            reff.child("Elective" + count_electives).child("Subjects").child(subjectModel.getSubjectName()).setValue(subjectModel);
+                        }
+                        reff.child("Elective" + count_electives).child("status").setValue("Not Floated");
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+
+
+/*
             Elective elective = new Elective();
-            TextInputEditText number_of_seats = findViewById(R.id.number_of_seatsET);
-            String number = number_of_seats.getText().toString();
             elective.setSubjectArrayList(arrayList);
-            elective.setNumberOfSeats(number);
+            elective.setSeatCountArrayList(seatCountArrayList);
             elective.setStatus("Not Floated");
             elective.setFacultyArrayList(facultyArrayList);
 
             FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-            FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
 
-
-            String program = intent.getStringExtra("program");
-            String year = intent.getStringExtra("year");
-            String branch = intent.getStringExtra("branch");
-            String new_program = program.substring(0,1) + program.substring(2);
             DatabaseReference reference = firebaseDatabase.getReference().child("Electives")
                     .child(new_program).child(year).child(branch);
             count_electives = 1;
@@ -164,7 +214,6 @@ public class AddSubjects extends AppCompatActivity implements View.OnClickListen
 //                        reference.child("Elective" + count_electives).setValue(elective);
                     }
                     else {
-
                         reference.child("Count of ELectives").setValue(Integer.toString(count_electives));
                         reference.child("Elective" + count_electives).setValue(elective);
 //                        reference.child("Elective" + count_electives).setValue(elective);
@@ -178,6 +227,7 @@ public class AddSubjects extends AppCompatActivity implements View.OnClickListen
                 }
             });
 
+            */
 
 //            for(int i=0;i<arrayList.size();i++) {
 //                Log.d("AddSubject", "checkIfValidAndRead: " + arrayList.get(i));

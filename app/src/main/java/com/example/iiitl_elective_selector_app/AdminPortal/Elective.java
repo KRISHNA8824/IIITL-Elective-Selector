@@ -7,16 +7,26 @@ import java.util.ArrayList;
 
 public class Elective implements Serializable{
     public ArrayList<String> subjectArrayList;
+    public ArrayList<String> seatCountArrayList;
     public String numberOfSeats;
     public String status;
     public ArrayList<String> facultyArrayList;
     public Elective(){
         subjectArrayList = new ArrayList<>();
         facultyArrayList = new ArrayList<>();
+        seatCountArrayList = new ArrayList<>();
     }
 
     public String getStatus() {
         return status;
+    }
+
+    public ArrayList<String> getSeatCountArrayList() {
+        return seatCountArrayList;
+    }
+
+    public void setSeatCountArrayList(ArrayList<String> seatCountArrayList) {
+        this.seatCountArrayList = seatCountArrayList;
     }
 
     public void setStatus(String status) {
