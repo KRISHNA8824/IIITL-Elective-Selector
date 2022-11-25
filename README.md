@@ -40,10 +40,6 @@ User Portal Features :
  <img src="https://user-images.githubusercontent.com/54670079/203907991-42e6a425-1ed1-446d-a614-1560c199ca48.jpg" width="250" /> <!-- Show elective list -->
  
 </p>
-![student subject select]()
-
-
-
 
 ## User Section
 <p float="middle">
