@@ -1,19 +1,19 @@
 # IIITL-Elective-Selector
 
-# IIIT-Lucknow-LIbrary-Automation
 An android application for automating the elective (floating and selection procedure) in the collage. The app provides an interface for the admin to circulate the electives and in the same way, students can opt for the desired elective through the app.
 
 Administration Portal Features : 
- 1. AdminPortal
- 2. AddSubjects
- 3. ShowUserList
- 4. FloatElective
- 5. AdminSUbjectList
+ 1. Admin Portal
+ 2. Add Elective
+ 3. Add Subjects in Electives
+ 4. Show User List
+ 5. Float Elective
+ 6. Admin Subject List
 
 User Portal Features :
- 1. Show elective lists
- 2. Show subject list in any specific elective with the option choose a subject
- 3. Student Portal
+ 1. Student Portal
+ 2. Show Elective Lists
+ 3. Show subject list in any specific elective with the option choose a subject
 
 ## Contributors
 1. [Ayush Kushwaha](https://github.com/knight-r)
